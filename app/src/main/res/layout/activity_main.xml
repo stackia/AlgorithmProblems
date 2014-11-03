@@ -1,0 +1,107 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F9FC"
+    tools:context="com.teamabcd.algorithmproblems.MainActivity">
+
+    <!-- Navigation Bar -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="#31C0ED"
+        android:id="@+id/navigationBar">
+
+        <ImageButton
+            android:id="@+id/navigationBarBackButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="12dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:background="@android:color/transparent"
+            android:visibility="gone"
+            android:src="@drawable/back_button_icon" />
+
+        <TextView
+            android:id="@+id/navigationBarTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="14dp"
+            android:textColor="#FFFFFF"
+            android:text="@string/navigation_bar_default_title" />
+
+        <LinearLayout
+            android:id="@+id/navigationBarActionLayout"
+            android:layout_alignParentRight="true"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <!-- Tab Frame Container -->
+    <FrameLayout
+        android:id="@+id/tabFrameContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/navigationBar"
+        android:layout_above="@+id/tabBar" />
+
+    <!-- Tab Bar -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="2dp"
+        android:background="@drawable/tab_bar_border"
+        android:id="@+id/tabBar">
+
+            <TextView
+                android:id="@+id/tabBarMyAnswersButton"
+                android:drawableTop="@drawable/tab_bar_button_problem_archive"
+                android:drawablePadding="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="2dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="@color/tab_bar_button_text_normal"
+                android:text="@string/tab_bar_button_problem_archive_title"
+                android:clickable="true"
+                android:onClick="onProblemArchiveTabButtonClicked" />
+
+            <TextView
+                android:id="@+id/tabBarProblemArchiveButton"
+                android:drawableTop="@drawable/tab_bar_button_my_answers"
+                android:drawablePadding="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="2dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="@color/tab_bar_button_text_normal"
+                android:text="@string/tab_bar_button_my_answer_title"
+                android:clickable="true"
+                android:onClick="onMyAnswerTabButtonClicked" />
+    </LinearLayout>
+
+</RelativeLayout>
+

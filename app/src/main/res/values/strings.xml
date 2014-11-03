@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Algorithm Problems</string>
+    <string name="title_activity_main">Algorithm Problems</string>
+    <string name="navigation_bar_default_title">Algorithm Problems</string>
+    <string name="tab_bar_button_problem_archive_title">Problems</string>
+    <string name="tab_bar_button_my_answer_title">My Submission</string>
+    <string name="title_activity_splash_screen">Algorithm Problems - Welcome</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+</resources>
