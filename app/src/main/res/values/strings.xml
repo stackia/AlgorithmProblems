@@ -8,5 +8,6 @@
     <string name="tab_bar_button_my_answer_title">My Submission</string>
     <string name="title_activity_splash_screen">Algorithm Problems - Welcome</string>
     <string name="navigation_bar_title_problem_list">Problems</string>
-
+    <string name="problem_default_title">Untitled Problem</string>
+    <string name="problem_default_id">-</string>
 </resources>

@@ -2,6 +2,7 @@ package com.teamabcd.algorithmproblems;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -29,7 +30,7 @@ public class ProblemListFragment extends Fragment implements AbsListView.OnItemC
 
     private NavigationBarHandler navigationBarHandler;
     private List<OJProblem> problemList = new ArrayList<OJProblem>();
-    private ListAdapter problemListAdapter;
+    private ProblemListAdapter problemListAdapter;
 
     public static ProblemListFragment newInstance() {
         ProblemListFragment fragment = new ProblemListFragment();
@@ -41,6 +42,9 @@ public class ProblemListFragment extends Fragment implements AbsListView.OnItemC
         super.onCreate(savedInstanceState);
         problemListAdapter = new ProblemListAdapter(getActivity(), problemList);
         navigationBarHandler.setNavigationBarTitle(R.string.navigation_bar_title_problem_list);
+        ProblemListAsyncLoader loader = new ProblemListAsyncLoader();
+        loader.setAccount(new OJAccount(OJAccount.Type.HDU));
+        loader.execute(0);
     }
 
     @Override
@@ -69,6 +73,29 @@ public class ProblemListFragment extends Fragment implements AbsListView.OnItemC
 
     }
 
+    private class ProblemListAsyncLoader extends AsyncTask<Integer, Integer, List<OJProblem>> {
+
+        OJAccount account;
+
+        public void setAccount(OJAccount account) {
+            this.account = account;
+        }
+
+        @Override
+        protected List<OJProblem> doInBackground(Integer... integers) {
+            OJProblemFetcher problemFetcher = new OJProblemFetcher(account);
+            return problemFetcher.fetchProblemList(integers[0]);
+        }
+
+        @Override
+        protected void onPostExecute(List<OJProblem> result) {
+            super.onPostExecute(result);
+            problemList.clear();
+            problemList.addAll(result);
+            problemListAdapter.notifyDataSetChanged();
+        }
+    }
+
     private static class ProblemListAdapter extends ArrayAdapter<OJProblem> {
         private ProblemListAdapter(Context context, List<OJProblem> problemList) {
             super(context, 0, problemList);
@@ -76,8 +103,18 @@ public class ProblemListFragment extends Fragment implements AbsListView.OnItemC
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
+            View view = convertView;
+            if (view == null) {
+                view = LayoutInflater.from(getContext()).inflate(R.layout.list_cell_problem, null);
+            }
 
-            return super.getView(position, convertView, parent);
+            OJProblem problem = getItem(position);
+            TextView idTextView = (TextView)view.findViewById(R.id.problemIdTextView);
+            idTextView.setText(Integer.toString(problem.getId()));
+            TextView titleTextView = (TextView)view.findViewById(R.id.problemTitleTextView);
+            titleTextView.setText(problem.getTitle());
+
+            return view;
         }
     }
 }
