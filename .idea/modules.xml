@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AlgorithmProblems.iml" filepath="$PROJECT_DIR$/AlgorithmProblems.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OJ Client/OJ Client.iml" filepath="$PROJECT_DIR$/OJ Client/OJ Client.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

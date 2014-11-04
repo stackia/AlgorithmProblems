@@ -67,7 +67,7 @@
         android:id="@+id/tabBar">
 
             <TextView
-                android:id="@+id/tabBarMyAnswersButton"
+                android:id="@+id/tabBarProblemArchiveButton"
                 android:drawableTop="@drawable/tab_bar_button_problem_archive"
                 android:drawablePadding="5dp"
                 android:layout_marginLeft="10dp"
@@ -85,7 +85,7 @@
                 android:onClick="onProblemArchiveTabButtonClicked" />
 
             <TextView
-                android:id="@+id/tabBarProblemArchiveButton"
+                android:id="@+id/tabBarMyAnswersButton"
                 android:drawableTop="@drawable/tab_bar_button_my_answers"
                 android:drawablePadding="5dp"
                 android:layout_marginLeft="10dp"
