@@ -1,11 +1,18 @@
 package com.teamabcd.module.ojclient;
 
+import android.nfc.Tag;
+
+import java.io.Serializable;
+
 /**
  * Project: Algorithm Problems
  * Created by: Stackia<jsq2627@gmail.com>
  * Date: 10/14/14
  */
-public class OJProblem {
+public class OJProblem implements Serializable {
+
+    public final static String tag = "OJProblem";
+
     private int id;
     private SolveStatus solveStatus = SolveStatus.UNTRIED;
     private int acceptedSubmission;

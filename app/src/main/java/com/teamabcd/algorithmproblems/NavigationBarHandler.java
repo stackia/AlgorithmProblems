@@ -1,9 +1,14 @@
 package com.teamabcd.algorithmproblems;
 
-/**
- * Created by Stackia on 11/4/14.
- */
+import java.security.PrivateKey;
+import java.util.PriorityQueue;
+
 public interface NavigationBarHandler {
+
+    abstract public void setCurrentBackStack(FragmentBackStackManager backStack);
+
+    abstract public FragmentBackStackManager getCurrentBackStack();
+
     abstract public boolean isBackButtonEnabled();
 
     abstract public void setBackButtonEnabled(boolean enabled);

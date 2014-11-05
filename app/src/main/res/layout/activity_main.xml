@@ -3,13 +3,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F9FC"
+    android:background="@color/pane_background"
     tools:context="com.teamabcd.algorithmproblems.MainActivity">
 
     <!-- Navigation Bar -->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="44dp"
         android:layout_alignParentTop="true"
         android:background="#31C0ED"
         android:id="@+id/navigationBar">
@@ -17,25 +17,21 @@
         <ImageButton
             android:id="@+id/navigationBarBackButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:paddingLeft="12dp"
-            android:paddingRight="10dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
             android:background="@android:color/transparent"
-            android:visibility="gone"
             android:src="@drawable/back_button_icon" />
 
         <TextView
             android:id="@+id/navigationBarTitle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="17sp"
             android:layout_centerInParent="true"
-            android:layout_marginTop="14dp"
-            android:layout_marginBottom="14dp"
             android:textColor="#FFFFFF"
             android:text="@string/navigation_bar_default_title" />
 

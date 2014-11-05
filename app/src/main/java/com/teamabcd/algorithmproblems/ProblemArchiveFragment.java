@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
 public class ProblemArchiveFragment extends Fragment {
 
     public final static String tag = "PROBLEM_ARCHIVE_FRAGMENT";
@@ -32,7 +31,7 @@ public class ProblemArchiveFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            NavigationBarHandler navigationBarHandler = (NavigationBarHandler) activity;
+            NavigationBarHandler navigationBarHandler = (NavigationBarHandler)activity;
             backStackManager.setNavigationBarHandler(navigationBarHandler);
             backStackManager.setFragmentManager(getFragmentManager());
         } catch (ClassCastException e) {

@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="problem_state_layout_width">76dp</dimen>
+    <dimen name="problem_detail_label_height">32dp</dimen>
+    <dimen name="problem_detail_text_margin_left">14dp</dimen>
+    <dimen name="problem_detail_text_margin_right">14dp</dimen>
+    <dimen name="problem_detail_text_margin_top">2dp</dimen>
+    <dimen name="problem_detail_text_margin_bottom">8dp</dimen>
 </resources>

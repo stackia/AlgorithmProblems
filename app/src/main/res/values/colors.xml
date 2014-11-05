@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <drawable name="grey_cell_selected_background">#e9e9e9</drawable>
+    <drawable name="grey_cell_selected_background">#E9E9E9</drawable>
+    <color name="pane_background">#F5F9FC</color>
+    <color name="problem_label_text">#32C0ED</color>
+    <color name="tab_bar_button_text_normal">#bfbfbf</color>
+    <color name="tab_bar_button_text_highlighted">#31c0ed</color>
 </resources>

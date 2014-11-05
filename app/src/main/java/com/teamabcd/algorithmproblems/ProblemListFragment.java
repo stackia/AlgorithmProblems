@@ -70,7 +70,7 @@ public class ProblemListFragment extends Fragment implements ListView.OnItemClic
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-
+        navigationBarHandler.getCurrentBackStack().pushFragment(ProblemDetailFragment.newInstance(problemList.get(position)));
     }
 
     private static class ProblemListAdapter extends ArrayAdapter<OJProblem> {

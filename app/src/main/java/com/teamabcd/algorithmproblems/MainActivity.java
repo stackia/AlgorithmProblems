@@ -7,7 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
+import android.widget.Toast;
+import android.os.Handler;
 
 public class MainActivity extends Activity implements NavigationBarHandler {
 
@@ -16,6 +17,8 @@ public class MainActivity extends Activity implements NavigationBarHandler {
     private TabEnum currentTab = TabEnum.Undefined;
     private ProblemArchiveFragment problemArchiveFragment = null;
     private MyAnswerFragment myAnswerFragment = null;
+    private FragmentBackStackManager currentBackStack = null;
+    private boolean doubleBackToExitPressedOnce = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,27 @@ public class MainActivity extends Activity implements NavigationBarHandler {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putSerializable(CURRENT_TAB_TAG, currentTab);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (currentBackStack != null && currentBackStack.isPoppable()) {
+            currentBackStack.popFragment();
+            return;
+        }
+
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+        }
+
+        doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, R.string.press_back_twice_to_exit, Toast.LENGTH_SHORT).show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce = false;
+            }
+        }, 2000);
     }
 
     private void setSelectedTabButton(TabEnum tab) {
@@ -145,6 +169,16 @@ public class MainActivity extends Activity implements NavigationBarHandler {
     public void setNavigationBarTitle(String title) {
         TextView titleView = (TextView) findViewById(R.id.navigationBarTitle);
         titleView.setText(title);
+    }
+
+    @Override
+    public void setCurrentBackStack(FragmentBackStackManager backStack) {
+        currentBackStack = backStack;
+    }
+
+    @Override
+    public FragmentBackStackManager getCurrentBackStack() {
+        return currentBackStack;
     }
 
     enum TabEnum {

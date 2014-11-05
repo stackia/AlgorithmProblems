@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">Algorithm Problems</string>
     <string name="title_activity_main">Algorithm Problems</string>
     <string name="navigation_bar_default_title">Algorithm Problems</string>
@@ -13,4 +14,11 @@
     <string name="problem_state_wrong">WRONG</string>
     <string name="problem_default_statistics">NO STATISTIC DATA</string>
     <string name="problem_statistics_text_format">Ratio: %1$.1f%% (%2$d / %3$d)</string>
+    <string name="problem_description_label">Problem Description</string>
+    <string name="problem_input_label">Input</string>
+    <string name="problem_output_label">Output</string>
+    <string name="problem_sample_input_label">Sample Input</string>
+    <string name="problem_sample_output_label">Sample Output</string>
+    <string name="press_back_twice_to_exit">Press BACK again if you want to exit.</string>
+
 </resources>

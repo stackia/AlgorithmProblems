@@ -3,12 +3,10 @@ package com.teamabcd.algorithmproblems;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.text.AndroidCharacter;
 
 import java.util.Stack;
 
-/**
- * Created by Stackia on 11/4/14.
- */
 public class FragmentBackStackManager {
 
     private NavigationBarHandler navigationBarHandler = null;
@@ -50,14 +48,17 @@ public class FragmentBackStackManager {
             return;
         }
         FragmentTransaction transaction = fragmentManager.beginTransaction();
+        if (animated) {
+            transaction.setCustomAnimations(R.animator.slide_left_in, R.animator.zoom_exit);
+        }
         Fragment backFragment = backStack.peek();
-        if (backFragment != null) {
+        if (!isPoppable()) {
             transaction.hide(backStack.peek());
         }
         transaction.add(containerId, fragment);
         transaction.commit();
-        updateNavigationBarBackButtonEnabled();
         backStack.push(fragment);
+        updateNavigationBarBackButtonEnabled();
     }
 
     public Fragment popFragment() {
@@ -65,12 +66,15 @@ public class FragmentBackStackManager {
     }
 
     public Fragment popFragment(boolean animated) {
-        if (backStack.size() <= 1) { // Cannot pop root fragment
+        if (!isPoppable()) { // Cannot pop root fragment
             return null;
         }
         Fragment currentFragment = backStack.pop();
         Fragment backFragment = backStack.peek();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
+        if (animated) {
+            transaction.setCustomAnimations(R.animator.zoom_enter, R.animator.slide_right_out);
+        }
         transaction.remove(currentFragment);
         transaction.show(backFragment);
         transaction.commit();
@@ -78,11 +82,16 @@ public class FragmentBackStackManager {
         return currentFragment;
     }
 
+    public boolean isPoppable() {
+        return backStack.size() > 1;
+    }
+
     private void updateNavigationBarBackButtonEnabled() {
-        if (backStack.size() <= 1) {
-            navigationBarHandler.setBackButtonEnabled(false);
-        } else {
+        navigationBarHandler.setCurrentBackStack(this);
+        if (isPoppable()) {
             navigationBarHandler.setBackButtonEnabled(true);
+        } else {
+            navigationBarHandler.setBackButtonEnabled(false);
         }
     }
 }
