@@ -50,7 +50,7 @@ public class OJProblem {
         return id;
     }
 
-    public void setId(int id) {
+    void setId(int id) {
         this.id = id;
     }
 
@@ -70,7 +70,7 @@ public class OJProblem {
         this.totalSubmission = totalSubmission;
     }
 
-    int getAcceptedSubmission() {
+    public int getAcceptedSubmission() {
         return acceptedSubmission;
     }
 

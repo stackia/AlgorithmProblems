@@ -6,22 +6,84 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="63dp"
         android:layout_marginBottom="3dp"
-        android:layout_marginTop="3dp"
-        android:background="@drawable/problem_card_background">
+        android:layout_marginTop="3dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="6dp"
+            android:src="@drawable/problem_card_background"
+            android:scaleType="fitXY"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="63dp"
+            android:src="@drawable/problem_id_decoration"
+            android:scaleType="fitXY" />
 
         <TextView
             android:id="@+id/problemIdTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="44dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:typeface="sans"
+            android:textStyle="italic"
+            android:textSize="16sp"
             android:text="@string/problem_default_id" />
 
         <TextView
             android:id="@+id/problemTitleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:text="@string/problem_default_title" />
+            android:layout_marginTop="14dp"
+            android:layout_marginLeft="64dp"
+            android:singleLine="true"
+            android:textSize="15sp"
+            android:text="@string/problem_default_title"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/problemStateLayout" />
+
+        <TextView
+            android:id="@+id/problemStatisticsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="37dp"
+            android:layout_marginLeft="64dp"
+            android:singleLine="true"
+            android:textSize="12sp"
+            android:textColor="#ffa8a8a8"
+            android:text="@string/problem_default_statistics"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/problemStateLayout" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="@dimen/problem_state_layout_width"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:paddingRight="8dp"
+            android:paddingLeft="8dp"
+            android:layout_alignParentRight="true"
+            android:id="@+id/problemStateLayout">
+
+            <ImageView
+                android:id="@+id/problemStateIconView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/problem_state_untried_icon" />
+
+            <TextView
+                android:id="@+id/problemStateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:textSize="10sp"
+                android:text="@string/problem_state_untried"/>
+        </LinearLayout>
     </RelativeLayout>
 </FrameLayout>

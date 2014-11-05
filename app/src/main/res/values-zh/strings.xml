@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">算法题库</string>
+    <string name="title_activity_main">算法题库</string>
+    <string name="navigation_bar_default_title">算法题库</string>
+    <string name="tab_bar_button_problem_archive_title">题库</string>
+    <string name="tab_bar_button_my_answer_title">我的作答</string>
+    <string name="navigation_bar_title_problem_list">题库</string>
+    <string name="problem_default_title">无题</string>
+    <string name="problem_default_id">#</string>
+    <string name="problem_state_untried">未作答</string>
+    <string name="problem_state_accept">已通过</string>
+    <string name="problem_state_wrong">未通过</string>
+    <string name="problem_default_statistics">无统计数据</string>
+    <string name="problem_statistics_text_format">通过率：%1$.1f%% (%2$d / %3$d)</string>
 </resources>
