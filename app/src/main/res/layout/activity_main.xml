@@ -23,7 +23,8 @@
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:background="@android:color/transparent"
-            android:src="@drawable/back_button_icon" />
+            android:src="@drawable/back_button_icon"
+            android:onClick="onBackButtonClicked" />
 
         <TextView
             android:id="@+id/navigationBarTitle"

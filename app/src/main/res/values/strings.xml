@@ -20,5 +20,6 @@
     <string name="problem_sample_input_label">Sample Input</string>
     <string name="problem_sample_output_label">Sample Output</string>
     <string name="press_back_twice_to_exit">Press BACK again if you want to exit.</string>
-
+    <string name="navigation_bar_title_problem_detail">Problem Detail</string>
+    <string name="network_operation_timeout">Connection timeout.</string>
 </resources>

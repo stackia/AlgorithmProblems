@@ -5,4 +5,5 @@
     <color name="problem_label_text">#32C0ED</color>
     <color name="tab_bar_button_text_normal">#bfbfbf</color>
     <color name="tab_bar_button_text_highlighted">#31c0ed</color>
+    <color name="circle_progress_bar_color">#31c0ed</color>
 </resources>

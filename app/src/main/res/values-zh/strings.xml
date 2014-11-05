@@ -13,4 +13,12 @@
     <string name="problem_state_wrong">未通过</string>
     <string name="problem_default_statistics">无统计数据</string>
     <string name="problem_statistics_text_format">通过率：%1$.1f%% (%2$d / %3$d)</string>
+    <string name="problem_description_label">问题描述</string>
+    <string name="problem_input_label">输入描述</string>
+    <string name="problem_output_label">输出描述</string>
+    <string name="problem_sample_input_label">输入样例</string>
+    <string name="problem_sample_output_label">输出样例</string>
+    <string name="press_back_twice_to_exit">再次按下返回键退出。</string>
+    <string name="navigation_bar_title_problem_detail">题目详情</string>
+    <string name="network_operation_timeout">连接超时。</string>
 </resources>

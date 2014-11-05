@@ -6,4 +6,7 @@
     <dimen name="problem_detail_text_margin_right">14dp</dimen>
     <dimen name="problem_detail_text_margin_top">2dp</dimen>
     <dimen name="problem_detail_text_margin_bottom">8dp</dimen>
+    <dimen name="circle_progress_bar_width">22dp</dimen>
+    <dimen name="circle_progress_bar_height">22dp</dimen>
+    <dimen name="circle_progress_bar_stroke">2dp</dimen>
 </resources>

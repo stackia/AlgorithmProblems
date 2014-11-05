@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,9 +24,8 @@ import com.teamabcd.module.ojclient.OJProblemFetcher;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProblemListFragment extends Fragment implements ListView.OnItemClickListener {
+public class ProblemListFragment extends SlidingFragment implements ListView.OnItemClickListener {
 
-    private NavigationBarHandler navigationBarHandler;
     private List<OJProblem> problemList = new ArrayList<OJProblem>();
     private ProblemListAdapter problemListAdapter;
 
@@ -49,8 +49,6 @@ public class ProblemListFragment extends Fragment implements ListView.OnItemClic
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_problem_list, container, false);
 
-        navigationBarHandler.setNavigationBarTitle(R.string.navigation_bar_title_problem_list);
-
         ListView problemListView = (ListView) view.findViewById(R.id.problemListView);
         problemListView.setAdapter(problemListAdapter);
         problemListView.setOnItemClickListener(this);
@@ -59,18 +57,13 @@ public class ProblemListFragment extends Fragment implements ListView.OnItemClic
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            navigationBarHandler = (NavigationBarHandler) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException("Activity must implement NavigationBarHandler interface.");
-        }
+    public int getNavigationBarTitleResource() {
+        return R.string.navigation_bar_title_problem_list;
     }
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-        navigationBarHandler.getCurrentBackStack().pushFragment(ProblemDetailFragment.newInstance(problemList.get(position)));
+        getNavigationBarHandler().getCurrentBackStack().pushFragment(ProblemDetailFragment.newInstance(problemList.get(position)));
     }
 
     private static class ProblemListAdapter extends ArrayAdapter<OJProblem> {
@@ -92,7 +85,7 @@ public class ProblemListFragment extends Fragment implements ListView.OnItemClic
             idTextView.setText(Integer.toString(problem.getId()));
 
             TextView titleTextView = (TextView) view.findViewById(R.id.problemTitleTextView);
-            titleTextView.setText(problem.getTitle());
+            titleTextView.setText(Html.fromHtml(problem.getTitle()));
 
             TextView statisticsTextView = (TextView) view.findViewById(R.id.problemStatisticsTextView);
             statisticsTextView.setText(

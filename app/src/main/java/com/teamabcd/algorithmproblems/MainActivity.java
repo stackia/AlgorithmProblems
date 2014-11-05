@@ -5,6 +5,9 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -134,6 +137,10 @@ public class MainActivity extends Activity implements NavigationBarHandler {
         setCurrentTab(TabEnum.MyAnswer);
     }
 
+    public void onBackButtonClicked(View view) {
+        onBackPressed();
+    }
+
     @Override
     public boolean isBackButtonEnabled() {
         ImageButton backButton = (ImageButton) findViewById(R.id.navigationBarBackButton);
@@ -144,19 +151,26 @@ public class MainActivity extends Activity implements NavigationBarHandler {
     }
 
     @Override
-    public void setBackButtonEnabled(boolean enabled) {
+    public void setBackButtonEnabled(boolean enabled, boolean animated) {
         ImageButton backButton = (ImageButton) findViewById(R.id.navigationBarBackButton);
         if (enabled) {
+            if (animated) {
+                Animation animFadeIn = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.fade_in);
+                backButton.setAnimation(animFadeIn);
+            }
             backButton.setVisibility(View.VISIBLE);
         } else {
+            if (animated) {
+                Animation animFadeOut = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.fade_out);
+                backButton.setAnimation(animFadeOut);
+            }
             backButton.setVisibility(View.GONE);
         }
     }
 
     @Override
-    public void setNavigationBarTitle(int resId) {
-        TextView titleView = (TextView) findViewById(R.id.navigationBarTitle);
-        titleView.setText(resId);
+    public void setNavigationBarTitle(int resId, boolean animated) {
+        setNavigationBarTitle(getResources().getString(resId), animated);
     }
 
     @Override
@@ -166,9 +180,34 @@ public class MainActivity extends Activity implements NavigationBarHandler {
     }
 
     @Override
-    public void setNavigationBarTitle(String title) {
-        TextView titleView = (TextView) findViewById(R.id.navigationBarTitle);
-        titleView.setText(title);
+    public void setNavigationBarTitle(final String title, boolean animated) {
+        final TextView titleView = (TextView) findViewById(R.id.navigationBarTitle);
+        if (animated) {
+            AlphaAnimation out = new AlphaAnimation(1.0f, 0.0f);
+            out.setDuration(150);
+            out.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    titleView.setText(title);
+                    AlphaAnimation in = new AlphaAnimation(0.0f, 1.0f);
+                    in.setDuration(150);
+                    titleView.startAnimation(in);
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+            titleView.startAnimation(out);
+        } else {
+            titleView.setText(title);
+        }
     }
 
     @Override

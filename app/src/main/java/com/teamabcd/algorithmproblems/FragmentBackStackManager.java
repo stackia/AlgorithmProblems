@@ -29,14 +29,15 @@ public class FragmentBackStackManager {
 
     public void showTopFragment() {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        Fragment topFragment = backStack.peek();
+        SlidingFragment topFragment = (SlidingFragment)backStack.peek();
+        topFragment.setNavigationBarTitleNoAnimationNextTime();
         if (topFragment.isAdded()) {
             transaction.show(topFragment);
         } else {
             transaction.add(containerId, topFragment);
         }
         transaction.commit();
-        updateNavigationBarBackButtonEnabled();
+        updateNavigationBarBackButtonEnabled(false);
     }
 
     public void pushFragment(Fragment fragment) {
@@ -58,7 +59,7 @@ public class FragmentBackStackManager {
         transaction.add(containerId, fragment);
         transaction.commit();
         backStack.push(fragment);
-        updateNavigationBarBackButtonEnabled();
+        updateNavigationBarBackButtonEnabled(true);
     }
 
     public Fragment popFragment() {
@@ -78,7 +79,7 @@ public class FragmentBackStackManager {
         transaction.remove(currentFragment);
         transaction.show(backFragment);
         transaction.commit();
-        updateNavigationBarBackButtonEnabled();
+        updateNavigationBarBackButtonEnabled(true);
         return currentFragment;
     }
 
@@ -86,12 +87,12 @@ public class FragmentBackStackManager {
         return backStack.size() > 1;
     }
 
-    private void updateNavigationBarBackButtonEnabled() {
+    private void updateNavigationBarBackButtonEnabled(boolean animated) {
         navigationBarHandler.setCurrentBackStack(this);
         if (isPoppable()) {
-            navigationBarHandler.setBackButtonEnabled(true);
+            navigationBarHandler.setBackButtonEnabled(true, animated);
         } else {
-            navigationBarHandler.setBackButtonEnabled(false);
+            navigationBarHandler.setBackButtonEnabled(false, animated);
         }
     }
 }
