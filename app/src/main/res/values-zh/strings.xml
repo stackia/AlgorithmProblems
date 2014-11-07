@@ -20,5 +20,5 @@
     <string name="problem_sample_output_label">输出样例</string>
     <string name="press_back_twice_to_exit">再次按下返回键退出。</string>
     <string name="navigation_bar_title_problem_detail">题目详情</string>
-    <string name="network_operation_timeout">连接超时。</string>
+    <string name="network_operation_timeout"><u>连接超时，点击重试</u></string>
 </resources>

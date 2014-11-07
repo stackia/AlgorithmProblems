@@ -6,15 +6,40 @@
     android:background="@color/pane_background"
     tools:context="com.teamabcd.algorithmproblems.ProblemListFragment">
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:padding="14dp">
+
+        <TextView
+            android:id="@+id/fetchErrorTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="@color/tab_bar_button_text_highlighted"
+            android:visibility="gone"
+            android:text="@string/network_operation_timeout" />
+
+        <fr.castorflex.android.circularprogressbar.CircularProgressBar
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/loadingProgressBar"
+            android:layout_width="@dimen/circle_progress_bar_width"
+            android:layout_height="@dimen/circle_progress_bar_height"
+            android:indeterminate="true"
+            app:cpb_color="@color/circle_progress_bar_color"
+            app:cpb_rotation_speed="1.0"
+            app:cpb_sweep_speed="1.0"
+            app:cpb_stroke_width="@dimen/circle_progress_bar_stroke"
+            app:cpb_min_sweep_angle="10"
+            app:cpb_max_sweep_angle="300"
+            android:visibility="gone" />
+    </LinearLayout>
+
     <ListView
         android:id="@+id/problemListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@null" />
-
-    <TextView
-        android:id="@+id/fetchErrorTextView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center" />
 </com.teamabcd.algorithmproblems.SlidingFrameLayout>

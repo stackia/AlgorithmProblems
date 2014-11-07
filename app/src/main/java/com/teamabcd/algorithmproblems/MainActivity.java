@@ -225,4 +225,10 @@ public class MainActivity extends Activity implements NavigationBarHandler {
         ProblemArchive,
         MyAnswer,
     }
+
+    enum FetchState {
+        Working,
+        Failed,
+        Successful,
+    }
 }
