@@ -2,11 +2,22 @@
 <resources>
 
     <string name="app_name">Algorithm Problems</string>
+
     <string name="title_activity_main">Algorithm Problems</string>
+    <string name="title_activity_login">Login</string>
+
     <string name="navigation_bar_default_title">Algorithm Problems</string>
+    <string name="navigation_bar_title_problem_list">Problems</string>
+    <string name="navigation_bar_title_problem_detail">Problem Detail</string>
+    <string name="navigation_bar_title_my_answer">My Submission</string>
+
     <string name="tab_bar_button_problem_archive_title">Problems</string>
     <string name="tab_bar_button_my_answer_title">My Submission</string>
-    <string name="navigation_bar_title_problem_list">Problems</string>
+
+    <string name="network_operation_timeout"><u>Connection timeout. Click here to reload.</u></string>
+    <string name="network_operation_timeout_pull_down">Connection timeout. Please retry.</string>
+    <string name="press_back_twice_to_exit">Press BACK again if you want to exit.</string>
+
     <string name="problem_default_title">Untitled Problem</string>
     <string name="problem_default_id">#</string>
     <string name="problem_state_untried">NOT TESTED</string>
@@ -19,9 +30,10 @@
     <string name="problem_output_label">Output</string>
     <string name="problem_sample_input_label">Sample Input</string>
     <string name="problem_sample_output_label">Sample Output</string>
-    <string name="press_back_twice_to_exit">Press BACK again if you want to exit.</string>
-    <string name="navigation_bar_title_problem_detail">Problem Detail</string>
-    <string name="network_operation_timeout"><u>Connection timeout. Click here to reload.</u></string>
-    <string name="network_operation_timeout_pull_down">Connection timeout. Please retry.</string>
+
+    <string name="login_via_hdu_account_hint">You can use your HDU OJ account to login. You can register one at http://acm.hdu.edu.cn if you do not have.</string>
+    <string name="login_username_placeholder">Username</string>
+    <string name="login_password_placeholder">Password</string>
+    <string name="login_button_text">Login</string>
 
 </resources>

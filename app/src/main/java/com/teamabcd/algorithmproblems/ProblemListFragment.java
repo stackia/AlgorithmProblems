@@ -66,7 +66,10 @@ public class ProblemListFragment extends SlidingFragment implements ListView.OnI
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-        getNavigationBarHandler().getCurrentBackStack().pushFragment(ProblemDetailFragment.newInstance(problemList.get(position)));
+        FragmentBackStackManager backStackManager = getNavigationBarHandler().getCurrentBackStack();
+        if (!backStackManager.isAnimating()) {
+            backStackManager.pushFragment(ProblemDetailFragment.newInstance(problemList.get(position)));
+        }
     }
 
     @Override

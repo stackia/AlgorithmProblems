@@ -55,6 +55,10 @@ public class MainActivity extends Activity implements NavigationBarHandler, OJCl
 
     @Override
     public void onBackPressed() {
+        if (currentBackStack != null && currentBackStack.isAnimating()) {
+            return;
+        }
+
         if (currentBackStack != null && currentBackStack.isPoppable()) {
             currentBackStack.popFragment();
             return;

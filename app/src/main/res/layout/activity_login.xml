@@ -1,0 +1,65 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#5CBBF3"
+    tools:context="com.teamabcd.algorithmproblems.LoginActivity">
+
+    <ImageButton
+        android:id="@+id/navigationBarBackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="18dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/back_button_icon"
+        android:onClick="onBackButtonClicked" />
+
+    <LinearLayout
+        android:id="@+id/login_layout"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/login_edit_text_background"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:hint="@string/login_username_placeholder" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:hint="@string/login_password_placeholder"
+            android:background="@drawable/login_edit_text_background"
+            android:padding="10dp"
+            android:inputType="textPassword" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/login_button_background"
+            android:text="@string/login_button_text" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/login_layout"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:paddingBottom="20dp"
+        android:textColor="#FFFFFF"
+        android:text="@string/login_via_hdu_account_hint" />
+</RelativeLayout>

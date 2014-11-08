@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">算法题库</string>
+
     <string name="title_activity_main">算法题库</string>
+    <string name="title_activity_login">登录</string>
+
     <string name="navigation_bar_default_title">算法题库</string>
+    <string name="navigation_bar_title_problem_list">题库</string>
+    <string name="navigation_bar_title_problem_detail">题目详情</string>
+    <string name="navigation_bar_title_my_answer">我的作答</string>
+
     <string name="tab_bar_button_problem_archive_title">题库</string>
     <string name="tab_bar_button_my_answer_title">我的作答</string>
-    <string name="navigation_bar_title_problem_list">题库</string>
+
+    <string name="network_operation_timeout"><u>连接超时，点击重试</u></string>
+    <string name="network_operation_timeout_pull_down">连接超时，请重试。</string>
+    <string name="press_back_twice_to_exit">再次按下返回键退出。</string>
+
     <string name="problem_default_title">无题</string>
     <string name="problem_default_id">#</string>
     <string name="problem_state_untried">未作答</string>
@@ -18,8 +30,10 @@
     <string name="problem_output_label">输出描述</string>
     <string name="problem_sample_input_label">输入样例</string>
     <string name="problem_sample_output_label">输出样例</string>
-    <string name="press_back_twice_to_exit">再次按下返回键退出。</string>
-    <string name="navigation_bar_title_problem_detail">题目详情</string>
-    <string name="network_operation_timeout"><u>连接超时，点击重试</u></string>
-    <string name="network_operation_timeout_pull_down">连接超时，请重试。</string>
+
+    <string name="login_via_hdu_account_hint">请使用你的杭电OJ帐号登录。如果你还没有，可以前往 http://acm.hdu.edu.cn 进行注册。</string>
+    <string name="login_username_placeholder">用户名</string>
+    <string name="login_password_placeholder">密码</string>
+    <string name="login_button_text">登录</string>
+
 </resources>

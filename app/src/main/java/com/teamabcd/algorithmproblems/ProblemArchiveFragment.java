@@ -28,6 +28,14 @@ public class ProblemArchiveFragment extends Fragment {
     }
 
     @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            backStackManager.showTopFragment();
+        }
+    }
+
+    @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {

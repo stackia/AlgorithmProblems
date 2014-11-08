@@ -9,11 +9,11 @@ import java.util.Stack;
 public class FragmentBackStackManager {
 
     private NavigationBarHandler navigationBarHandler = null;
-    private Stack<Fragment> backStack = new Stack<Fragment>();
+    private Stack<SlidingFragment> backStack = new Stack<SlidingFragment>();
     private FragmentManager fragmentManager = null;
     private int containerId;
 
-    public FragmentBackStackManager(int containerId, Fragment rootFragment) {
+    public FragmentBackStackManager(int containerId, SlidingFragment rootFragment) {
         this.containerId = containerId;
         backStack.push(rootFragment);
     }
@@ -28,7 +28,7 @@ public class FragmentBackStackManager {
 
     public void showTopFragment() {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        SlidingFragment topFragment = (SlidingFragment) backStack.peek();
+        SlidingFragment topFragment = backStack.peek();
         topFragment.setNavigationBarTitleNoAnimationNextTime();
         if (topFragment.isAdded()) {
             transaction.show(topFragment);
@@ -36,14 +36,24 @@ public class FragmentBackStackManager {
             transaction.add(containerId, topFragment);
         }
         transaction.commit();
+        topFragment.resetNavigationBarTitle();
         updateNavigationBarBackButtonEnabled(false);
     }
 
-    public void pushFragment(Fragment fragment) {
+    public boolean isAnimating() {
+        if (backStack.size() == 1) {
+            return backStack.peek().isAnimating();
+        } else if (backStack.size() > 1) {
+            return backStack.peek().isAnimating() || backStack.get(backStack.size() - 2).isAnimating();
+        }
+        return false;
+    }
+
+    public void pushFragment(SlidingFragment fragment) {
         pushFragment(fragment, true);
     }
 
-    public void pushFragment(Fragment fragment, boolean animated) {
+    public void pushFragment(SlidingFragment fragment, boolean animated) {
         if (fragment == null) {
             return;
         }
@@ -51,7 +61,6 @@ public class FragmentBackStackManager {
         if (animated) {
             transaction.setCustomAnimations(R.animator.slide_left_in, R.animator.zoom_exit);
         }
-        Fragment backFragment = backStack.peek();
         if (!isPoppable()) {
             transaction.hide(backStack.peek());
         }
