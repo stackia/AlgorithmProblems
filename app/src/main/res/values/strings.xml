@@ -22,4 +22,6 @@
     <string name="press_back_twice_to_exit">Press BACK again if you want to exit.</string>
     <string name="navigation_bar_title_problem_detail">Problem Detail</string>
     <string name="network_operation_timeout"><u>Connection timeout. Click here to reload.</u></string>
+    <string name="network_operation_timeout_pull_down">Connection timeout. Please retry.</string>
+
 </resources>

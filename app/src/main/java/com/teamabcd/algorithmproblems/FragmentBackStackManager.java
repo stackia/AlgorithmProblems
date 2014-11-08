@@ -3,7 +3,6 @@ package com.teamabcd.algorithmproblems;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.text.AndroidCharacter;
 
 import java.util.Stack;
 
@@ -29,7 +28,7 @@ public class FragmentBackStackManager {
 
     public void showTopFragment() {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        SlidingFragment topFragment = (SlidingFragment)backStack.peek();
+        SlidingFragment topFragment = (SlidingFragment) backStack.peek();
         topFragment.setNavigationBarTitleNoAnimationNextTime();
         if (topFragment.isAdded()) {
             transaction.show(topFragment);

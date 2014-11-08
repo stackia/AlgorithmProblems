@@ -3,9 +3,9 @@ package com.teamabcd.algorithmproblems;
 
 public interface NavigationBarHandler {
 
-    public void setCurrentBackStack(FragmentBackStackManager backStack);
-
     public FragmentBackStackManager getCurrentBackStack();
+
+    public void setCurrentBackStack(FragmentBackStackManager backStack);
 
     public boolean isBackButtonEnabled();
 

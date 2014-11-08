@@ -31,7 +31,7 @@ public class ProblemArchiveFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            NavigationBarHandler navigationBarHandler = (NavigationBarHandler)activity;
+            NavigationBarHandler navigationBarHandler = (NavigationBarHandler) activity;
             backStackManager.setNavigationBarHandler(navigationBarHandler);
             backStackManager.setFragmentManager(getFragmentManager());
         } catch (ClassCastException e) {

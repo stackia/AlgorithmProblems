@@ -1,7 +1,5 @@
 package com.teamabcd.algorithmproblems;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.AsyncTask;
@@ -15,22 +13,21 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.teamabcd.module.ojclient.OJAccount;
-import com.teamabcd.module.ojclient.OJAccountOperator;
 import com.teamabcd.module.ojclient.OJProblem;
-import com.teamabcd.module.ojclient.OJProblemFetcher;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import fr.castorflex.android.circularprogressbar.CircularProgressBar;
 
-public class ProblemListFragment extends SlidingFragment implements ListView.OnItemClickListener, View.OnClickListener {
+public class ProblemListFragment extends SlidingFragment implements ListView.OnItemClickListener, View.OnClickListener, LoadMoreListView.OnLoadMoreListener {
 
     private List<OJProblem> problemList = new ArrayList<OJProblem>();
     private ProblemListAdapter problemListAdapter;
     private MainActivity.FetchState fetchState = MainActivity.FetchState.Working;
+    private int currentLoadedPage = 0;
 
     public static ProblemListFragment newInstance() {
         ProblemListFragment fragment = new ProblemListFragment();
@@ -42,11 +39,7 @@ public class ProblemListFragment extends SlidingFragment implements ListView.OnI
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         problemListAdapter = new ProblemListAdapter(getActivity(), problemList);
-
-        // TODO: Move loader out here
-        ProblemListAsyncLoader loader = new ProblemListAsyncLoader();
-        loader.setAccount(new OJAccount(OJAccount.Type.HDU, "jsq2627", "jsq2627_kz"));
-        loader.execute(0);
+        startLoadPageTask(currentLoadedPage + 1);
     }
 
     @Override
@@ -56,9 +49,10 @@ public class ProblemListFragment extends SlidingFragment implements ListView.OnI
         TextView fetchErrorTextView = (TextView) view.findViewById(R.id.fetchErrorTextView);
         fetchErrorTextView.setOnClickListener(this);
 
-        ListView problemListView = (ListView) view.findViewById(R.id.problemListView);
-        problemListView.setAdapter(problemListAdapter);
+        LoadMoreListView problemListView = (LoadMoreListView) view.findViewById(R.id.problemListView);
+        problemListView.setOnLoadMoreListener(this);
         problemListView.setOnItemClickListener(this);
+        problemListView.setAdapter(problemListAdapter);
 
         problemListAdapter.notifyDataSetChanged(view);
 
@@ -79,15 +73,20 @@ public class ProblemListFragment extends SlidingFragment implements ListView.OnI
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.fetchErrorTextView:
-                fetchState = MainActivity.FetchState.Working;
-                problemListAdapter.notifyDataSetChanged();
-
-                // TODO: Move loader out here
-                ProblemListAsyncLoader loader = new ProblemListAsyncLoader();
-                loader.setAccount(new OJAccount(OJAccount.Type.HDU, "jsq2627", "jsq2627_kz"));
-                loader.execute(0);
+                currentLoadedPage = 0;
+                startLoadPageTask(currentLoadedPage + 1);
                 break;
         }
+    }
+
+    @Override
+    public void onLoadMore() {
+        startLoadPageTask(currentLoadedPage + 1);
+    }
+
+    private void startLoadPageTask(int page) {
+        ProblemListAsyncLoader loader = new ProblemListAsyncLoader();
+        loader.execute(page);
     }
 
     private class ProblemListAdapter extends ArrayAdapter<OJProblem> {
@@ -98,26 +97,39 @@ public class ProblemListFragment extends SlidingFragment implements ListView.OnI
         public void notifyDataSetChanged(View view) {
             CircularProgressBar loadingProgressBar = (CircularProgressBar) view.findViewById(R.id.loadingProgressBar);
             TextView fetchErrorTextView = (TextView) view.findViewById(R.id.fetchErrorTextView);
-            ListView problemListView = (ListView) view.findViewById(R.id.problemListView);
+            LoadMoreListView problemListView = (LoadMoreListView) view.findViewById(R.id.problemListView);
 
             switch (fetchState) {
                 case Working:
-                    loadingProgressBar.setVisibility(View.VISIBLE);
-                    fetchErrorTextView.setVisibility(View.GONE);
-                    problemListView.setVisibility(View.GONE);
+                    if (currentLoadedPage == 0) {
+                        loadingProgressBar.setVisibility(View.VISIBLE);
+                        fetchErrorTextView.setVisibility(View.GONE);
+                        problemListView.setVisibility(View.GONE);
+                    } else {
+                        problemListView.forceLoadingViewVisible();
+                    }
                     break;
 
                 case Failed:
-                    loadingProgressBar.setVisibility(View.GONE);
-                    fetchErrorTextView.setVisibility(View.VISIBLE);
-                    problemListView.setVisibility(View.GONE);
+                    if (currentLoadedPage == 0) {
+                        loadingProgressBar.setVisibility(View.GONE);
+                        fetchErrorTextView.setVisibility(View.VISIBLE);
+                        problemListView.setVisibility(View.GONE);
+                    } else {
+                        problemListView.notifyLoadMoreFinished();
+                    }
                     break;
 
                 case Successful:
-                    loadingProgressBar.setVisibility(View.GONE);
-                    fetchErrorTextView.setVisibility(View.GONE);
-                    problemListView.setVisibility(View.VISIBLE);
-                    super.notifyDataSetChanged();
+                    if (currentLoadedPage == 1) {
+                        loadingProgressBar.setVisibility(View.GONE);
+                        fetchErrorTextView.setVisibility(View.GONE);
+                        problemListView.setVisibility(View.VISIBLE);
+                        super.notifyDataSetChanged();
+                    } else {
+                        problemListView.notifyLoadMoreFinished();
+                        super.notifyDataSetChanged();
+                    }
                     break;
             }
         }
@@ -181,19 +193,21 @@ public class ProblemListFragment extends SlidingFragment implements ListView.OnI
 
     private class ProblemListAsyncLoader extends AsyncTask<Integer, Integer, List<OJProblem>> {
 
-        OJAccount account;
-
-        public void setAccount(OJAccount account) {
-            this.account = account;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            fetchState = MainActivity.FetchState.Working;
+            problemListAdapter.notifyDataSetChanged();
         }
 
         @Override
         protected List<OJProblem> doInBackground(Integer... integers) {
-            OJAccountOperator accountOperator = new OJAccountOperator(account);
-            accountOperator.login();
-
-            OJProblemFetcher problemFetcher = new OJProblemFetcher(account);
-            return problemFetcher.fetchProblemList(integers[0]);
+            try {
+                OJClientHolder ojClientHolder = (OJClientHolder) getActivity();
+                return ojClientHolder.getProblemFetcher().fetchProblemList(integers[0]);
+            } catch (ClassCastException e) {
+                throw new ClassCastException("Activity must implement OJClientHolder");
+            }
         }
 
         @Override
@@ -207,8 +221,10 @@ public class ProblemListFragment extends SlidingFragment implements ListView.OnI
             }
 
             if (fetchState == MainActivity.FetchState.Successful) {
-                problemList.clear();
+                ++currentLoadedPage;
                 problemList.addAll(result);
+            } else if (currentLoadedPage > 0) {
+                Toast.makeText(getActivity(), R.string.network_operation_timeout_pull_down, Toast.LENGTH_SHORT).show();
             }
             problemListAdapter.notifyDataSetChanged();
         }

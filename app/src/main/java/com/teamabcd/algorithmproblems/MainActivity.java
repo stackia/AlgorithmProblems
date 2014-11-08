@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -11,9 +12,13 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.os.Handler;
 
-public class MainActivity extends Activity implements NavigationBarHandler {
+import com.teamabcd.module.ojclient.OJAccount;
+import com.teamabcd.module.ojclient.OJAccountOperator;
+import com.teamabcd.module.ojclient.OJProblemFetcher;
+import com.teamabcd.module.ojclient.OJSolutionSubmitter;
+
+public class MainActivity extends Activity implements NavigationBarHandler, OJClientHolder {
 
     public final static String CURRENT_TAB_TAG = "CURRENT_TAB";
 
@@ -22,6 +27,11 @@ public class MainActivity extends Activity implements NavigationBarHandler {
     private MyAnswerFragment myAnswerFragment = null;
     private FragmentBackStackManager currentBackStack = null;
     private boolean doubleBackToExitPressedOnce = false;
+
+    private OJAccount account = null;
+    private OJAccountOperator accountOperator = null;
+    private OJProblemFetcher problemFetcher = null;
+    private OJSolutionSubmitter solutionSubmitter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -211,13 +221,53 @@ public class MainActivity extends Activity implements NavigationBarHandler {
     }
 
     @Override
+    public FragmentBackStackManager getCurrentBackStack() {
+        return currentBackStack;
+    }
+
+    @Override
     public void setCurrentBackStack(FragmentBackStackManager backStack) {
         currentBackStack = backStack;
     }
 
     @Override
-    public FragmentBackStackManager getCurrentBackStack() {
-        return currentBackStack;
+    public OJAccount getAccount() {
+        if (account == null) {
+            account = new OJAccount(OJAccount.Type.HDU);
+        }
+        return account;
+    }
+
+    @Override
+    public void setAccount(OJAccount account) {
+        this.account = account;
+        getAccountOperator().setAccount(account);
+        getProblemFetcher().setAccount(account);
+        getSolutionSubmitter().setAccount(account);
+    }
+
+    @Override
+    public OJAccountOperator getAccountOperator() {
+        if (accountOperator == null) {
+            accountOperator = new OJAccountOperator(getAccount());
+        }
+        return accountOperator;
+    }
+
+    @Override
+    public OJProblemFetcher getProblemFetcher() {
+        if (problemFetcher == null) {
+            problemFetcher = new OJProblemFetcher(getAccount());
+        }
+        return problemFetcher;
+    }
+
+    @Override
+    public OJSolutionSubmitter getSolutionSubmitter() {
+        if (solutionSubmitter == null) {
+            solutionSubmitter = new OJSolutionSubmitter(getAccount());
+        }
+        return solutionSubmitter;
     }
 
     enum TabEnum {

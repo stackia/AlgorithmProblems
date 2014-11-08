@@ -94,21 +94,28 @@
                     android:layout_marginRight="@dimen/problem_detail_text_margin_right" />
             </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/problem_detail_label_height"
-                android:gravity="center_vertical"
-                android:text="@string/problem_output_label"
-                android:textColor="@color/problem_label_text" />
-
-            <TextView
-                android:id="@+id/problemDetailOutputTextView"
+            <LinearLayout
+                android:id="@+id/problemDetailOutputLayout"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/problem_detail_text_margin_top"
-                android:layout_marginBottom="@dimen/problem_detail_text_margin_bottom"
-                android:layout_marginLeft="@dimen/problem_detail_text_margin_left"
-                android:layout_marginRight="@dimen/problem_detail_text_margin_right" />
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/problem_detail_label_height"
+                    android:gravity="center_vertical"
+                    android:text="@string/problem_output_label"
+                    android:textColor="@color/problem_label_text" />
+
+                <TextView
+                    android:id="@+id/problemDetailOutputTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/problem_detail_text_margin_top"
+                    android:layout_marginBottom="@dimen/problem_detail_text_margin_bottom"
+                    android:layout_marginLeft="@dimen/problem_detail_text_margin_left"
+                    android:layout_marginRight="@dimen/problem_detail_text_margin_right" />
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/problemDetailSampleInputLayout"

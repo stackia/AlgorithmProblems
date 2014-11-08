@@ -1,9 +1,7 @@
 package com.teamabcd.algorithmproblems;
 
-import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,15 +9,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.teamabcd.module.ojclient.OJAccount;
-import com.teamabcd.module.ojclient.OJAccountOperator;
 import com.teamabcd.module.ojclient.OJProblem;
-import com.teamabcd.module.ojclient.OJProblemFetcher;
-
-import java.util.List;
-import java.util.ServiceConfigurationError;
 
 import fr.castorflex.android.circularprogressbar.CircularProgressBar;
 
@@ -47,13 +38,12 @@ public class ProblemDetailFragment extends SlidingFragment implements View.OnCli
         super.onCreate(savedInstanceState);
         Bundle args = getArguments();
         if (args != null) {
-            problem = (OJProblem)args.get(OJProblem.tag);
+            problem = (OJProblem) args.get(OJProblem.tag);
         }
         if (problem.getOutputDescription() == null) {
-            // TODO: Move account out here
-            ProblemDetailAsyncLoader loader = new ProblemDetailAsyncLoader();
-            loader.setAccount(new OJAccount(OJAccount.Type.HDU, "jsq2627", "jsq2627_kz"));
-            loader.execute(problem);
+            startLoadDetailTask();
+        } else {
+            fetchState = MainActivity.FetchState.Successful;
         }
     }
 
@@ -71,16 +61,14 @@ public class ProblemDetailFragment extends SlidingFragment implements View.OnCli
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.fetchErrorTextView:
-                // TODO: Move account out here
-                ProblemDetailAsyncLoader loader = new ProblemDetailAsyncLoader();
-                loader.setAccount(new OJAccount(OJAccount.Type.HDU, "jsq2627", "jsq2627_kz"));
-                loader.execute(problem);
-
-                fetchState = MainActivity.FetchState.Working;
-                notifyProblemDetailChange();
-
+                startLoadDetailTask();
                 break;
         }
+    }
+
+    private void startLoadDetailTask() {
+        ProblemDetailAsyncLoader loader = new ProblemDetailAsyncLoader();
+        loader.execute(problem);
     }
 
     private void notifyProblemDetailChange() {
@@ -88,6 +76,10 @@ public class ProblemDetailFragment extends SlidingFragment implements View.OnCli
     }
 
     private void notifyProblemDetailChange(View view) {
+        if (view == null) {
+            return;
+        }
+
         CircularProgressBar loadingProgressBar = (CircularProgressBar) view.findViewById(R.id.loadingProgressBar);
         TextView fetchErrorTextView = (TextView) view.findViewById(R.id.fetchErrorTextView);
 
@@ -99,6 +91,7 @@ public class ProblemDetailFragment extends SlidingFragment implements View.OnCli
         LinearLayout problemDetailInputLayout = (LinearLayout) view.findViewById(R.id.problemDetailInputLayout);
         TextView problemDetailInputTextView = (TextView) view.findViewById(R.id.problemDetailInputTextView);
 
+        LinearLayout problemDetailOutputLayout = (LinearLayout) view.findViewById(R.id.problemDetailOutputLayout);
         TextView problemDetailOutputTextView = (TextView) view.findViewById(R.id.problemDetailOutputTextView);
 
         LinearLayout problemDetailSampleInputLayout = (LinearLayout) view.findViewById(R.id.problemDetailSampleInputLayout);
@@ -136,39 +129,48 @@ public class ProblemDetailFragment extends SlidingFragment implements View.OnCli
                     problemDetailInputLayout.setVisibility(View.GONE);
                 }
 
-                problemDetailOutputTextView.setText(HtmlUtils.fromHtmlTrimTrailingLineBreak(problem.getOutputDescription()));
+                if (problem.getOutputDescription() != null) {
+                    problemDetailOutputLayout.setVisibility(View.VISIBLE);
+                    problemDetailOutputTextView.setText(HtmlUtils.fromHtmlTrimTrailingLineBreak(problem.getOutputDescription()));
+                } else {
+                    problemDetailOutputLayout.setVisibility(View.GONE);
+                }
 
                 if (problem.getInputSample() != null) {
                     problemDetailSampleInputLayout.setVisibility(View.VISIBLE);
 
-                    problemDetailSampleInputTextView.setText(problem.getInputSample());
+                    problemDetailSampleInputTextView.setText(Html.fromHtml(problem.getInputSample().replaceAll("\\n", "<br>")));
                 } else {
-
                     problemDetailSampleInputLayout.setVisibility(View.GONE);
                 }
 
-                problemDetailSampleOutputTextView.setText(problem.getOutputSample());
+                problemDetailSampleOutputTextView.setText(Html.fromHtml(problem.getOutputSample().replaceAll("\\n", "<br>")));
                 break;
         }
     }
 
     private class ProblemDetailAsyncLoader extends AsyncTask<OJProblem, Integer, OJProblem> {
 
-        OJAccount account;
-
-        public void setAccount(OJAccount account) {
-            this.account = account;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            fetchState = MainActivity.FetchState.Working;
+            notifyProblemDetailChange();
         }
 
         @Override
         protected OJProblem doInBackground(OJProblem... ojProblems) {
-            OJProblemFetcher problemFetcher = new OJProblemFetcher(account);
-            if (problemFetcher.fillProblem(ojProblems[0])) {
-                fetchState = MainActivity.FetchState.Successful;
-            } else {
-                fetchState = MainActivity.FetchState.Failed;
+            try {
+                OJClientHolder ojClientHolder = (OJClientHolder) getActivity();
+                if (ojClientHolder.getProblemFetcher().fillProblem(ojProblems[0])) {
+                    fetchState = MainActivity.FetchState.Successful;
+                } else {
+                    fetchState = MainActivity.FetchState.Failed;
+                }
+                return ojProblems[0];
+            } catch (ClassCastException e) {
+                throw new ClassCastException("Activity must implement OJClientHolder");
             }
-            return ojProblems[0];
         }
 
         @Override
