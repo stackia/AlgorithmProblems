@@ -38,103 +38,206 @@
             app:cpb_sweep_speed="1.0" />
     </LinearLayout>
 
-    <ScrollView
-        android:id="@+id/problemDetailScrollView"
+    <RelativeLayout
+        android:id="@+id/problemDetailLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <RelativeLayout
+            android:id="@+id/codeAreaLayout"
             android:orientation="vertical"
-            android:padding="14dp">
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="82dp"
+            android:background="#5CBBF2">
 
-            <LinearLayout
-                android:id="@+id/problemDetailDescriptionLayout"
+            <RelativeLayout
+                android:id="@+id/problemCodeAreaAdjustLine"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:background="#96D3F6">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/problem_detail_label_height"
-                    android:drawableLeft="@drawable/problem_description_label_icon"
-                    android:drawablePadding="8dp"
-                    android:gravity="center_vertical"
-                    android:text="@string/problem_description_label"
-                    android:textColor="@color/problem_label_text" />
-
-                <TextView
-                    android:id="@+id/problemDetailDescriptionTextView"
+                    android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/problem_detail_text_margin_bottom"
-                    android:layout_marginLeft="@dimen/problem_detail_text_margin_left"
-                    android:layout_marginRight="@dimen/problem_detail_text_margin_right"
-                    android:layout_marginTop="@dimen/problem_detail_text_margin_top" />
-            </LinearLayout>
+                    android:text="・ ・ ・"
+                    android:textStyle="bold"
+                    android:textSize="10sp"
+                    android:textColor="#FFFFFF"/>
+            </RelativeLayout>
+
+            <FrameLayout
+                android:id="@+id/problemCodeAreaAdjustLineTouchArea"
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <RelativeLayout
+                android:layout_below="@id/problemCodeAreaAdjustLine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/problemCodeAreaLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_alignParentLeft="true"
+                    android:drawableLeft="@drawable/problem_code_area_label_icon"
+                    android:drawablePadding="6dp"
+                    android:textColor="#FFFFFF"
+                    android:text="@string/problem_code_area_label" />
+
+                <com.teamabcd.algorithmproblems.CustomView.ProgramLanguageSpinner
+                    android:id="@+id/problemCodeAreaLanguageSpanner"
+                    android:spinnerMode="dialog"
+                    android:dropDownWidth="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/program_language_dashed_underline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/problemCodeAreaMainEditText"
+                    android:layout_below="@id/problemCodeAreaLabel"
+                    android:background="@drawable/problem_code_area_edit_text_background"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:paddingTop="8dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:gravity="top|left"
+                    android:scrollbars="vertical"
+                    android:inputType="textVisiblePassword|textNoSuggestions|textMultiLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <ScrollView
+            android:layout_above="@id/codeAreaLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <LinearLayout
-                android:id="@+id/problemDetailInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="14dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/problem_detail_label_height"
-                    android:gravity="center_vertical"
-                    android:text="@string/problem_input_label"
-                    android:textColor="@color/problem_label_text" />
-
-                <TextView
-                    android:id="@+id/problemDetailInputTextView"
+                <LinearLayout
+                    android:id="@+id/problemDetailDescriptionLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/problem_detail_text_margin_bottom"
-                    android:layout_marginLeft="@dimen/problem_detail_text_margin_left"
-                    android:layout_marginRight="@dimen/problem_detail_text_margin_right"
-                    android:layout_marginTop="@dimen/problem_detail_text_margin_top" />
-            </LinearLayout>
+                    android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/problemDetailOutputLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/problem_detail_label_height"
+                        android:drawableLeft="@drawable/problem_description_label_icon"
+                        android:drawablePadding="8dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/problem_description_label"
+                        android:textColor="@color/problem_label_text" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/problem_detail_label_height"
-                    android:gravity="center_vertical"
-                    android:text="@string/problem_output_label"
-                    android:textColor="@color/problem_label_text" />
+                    <TextView
+                        android:id="@+id/problemDetailDescriptionTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/problem_detail_text_margin_bottom"
+                        android:layout_marginLeft="@dimen/problem_detail_text_margin_left"
+                        android:layout_marginRight="@dimen/problem_detail_text_margin_right"
+                        android:layout_marginTop="@dimen/problem_detail_text_margin_top" />
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/problemDetailOutputTextView"
+                <LinearLayout
+                    android:id="@+id/problemDetailInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/problem_detail_text_margin_bottom"
-                    android:layout_marginLeft="@dimen/problem_detail_text_margin_left"
-                    android:layout_marginRight="@dimen/problem_detail_text_margin_right"
-                    android:layout_marginTop="@dimen/problem_detail_text_margin_top" />
-            </LinearLayout>
+                    android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/problemDetailSampleInputLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/problem_detail_label_height"
+                        android:gravity="center_vertical"
+                        android:text="@string/problem_input_label"
+                        android:textColor="@color/problem_label_text" />
+
+                    <TextView
+                        android:id="@+id/problemDetailInputTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/problem_detail_text_margin_bottom"
+                        android:layout_marginLeft="@dimen/problem_detail_text_margin_left"
+                        android:layout_marginRight="@dimen/problem_detail_text_margin_right"
+                        android:layout_marginTop="@dimen/problem_detail_text_margin_top" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/problemDetailOutputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/problem_detail_label_height"
+                        android:gravity="center_vertical"
+                        android:text="@string/problem_output_label"
+                        android:textColor="@color/problem_label_text" />
+
+                    <TextView
+                        android:id="@+id/problemDetailOutputTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/problem_detail_text_margin_bottom"
+                        android:layout_marginLeft="@dimen/problem_detail_text_margin_left"
+                        android:layout_marginRight="@dimen/problem_detail_text_margin_right"
+                        android:layout_marginTop="@dimen/problem_detail_text_margin_top" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/problemDetailSampleInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/problem_detail_label_height"
+                        android:gravity="center_vertical"
+                        android:text="@string/problem_sample_input_label"
+                        android:textColor="@color/problem_label_text" />
+
+                    <TextView
+                        android:id="@+id/problemDetailSampleInputTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/problem_detail_text_margin_bottom"
+                        android:layout_marginLeft="@dimen/problem_detail_text_margin_left"
+                        android:layout_marginRight="@dimen/problem_detail_text_margin_right"
+                        android:layout_marginTop="@dimen/problem_detail_text_margin_top"
+                        android:background="@drawable/problem_sample_text_view_border"
+                        android:paddingBottom="6dp"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:paddingTop="6dp"
+                        android:typeface="monospace" />
+                </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/problem_detail_label_height"
                     android:gravity="center_vertical"
-                    android:text="@string/problem_sample_input_label"
+                    android:text="@string/problem_sample_output_label"
                     android:textColor="@color/problem_label_text" />
 
                 <TextView
-                    android:id="@+id/problemDetailSampleInputTextView"
+                    android:id="@+id/problemDetailSampleOutputTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/problem_detail_text_margin_bottom"
@@ -148,28 +251,6 @@
                     android:paddingTop="6dp"
                     android:typeface="monospace" />
             </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/problem_detail_label_height"
-                android:gravity="center_vertical"
-                android:text="@string/problem_sample_output_label"
-                android:textColor="@color/problem_label_text" />
-
-            <TextView
-                android:id="@+id/problemDetailSampleOutputTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/problem_detail_text_margin_bottom"
-                android:layout_marginLeft="@dimen/problem_detail_text_margin_left"
-                android:layout_marginRight="@dimen/problem_detail_text_margin_right"
-                android:layout_marginTop="@dimen/problem_detail_text_margin_top"
-                android:background="@drawable/problem_sample_text_view_border"
-                android:paddingBottom="6dp"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
-                android:paddingTop="6dp"
-                android:typeface="monospace" />
-        </LinearLayout>
-    </ScrollView>
+        </ScrollView>
+    </RelativeLayout>
 </com.teamabcd.algorithmproblems.CustomView.SlidingFrameLayout>

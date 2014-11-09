@@ -21,7 +21,6 @@ import fr.castorflex.android.circularprogressbar.CircularProgressBar;
  */
 public class LoginActivity extends Activity {
 
-    public static final String INTENT_EXTRA_OJ_ACCOUNT = "OJ_ACCOUNT";
     public static final int RESULT_CODE_LOGIN_SUCCESSFUL = 1;
     public static final String FETCH_STATE_TAG = "FETCH_STATE";
 

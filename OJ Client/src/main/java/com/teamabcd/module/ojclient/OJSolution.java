@@ -1,5 +1,9 @@
 package com.teamabcd.module.ojclient;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Project: Algorithm Problems
  * Created by: Stackia <jsq2627@gmail.com>
@@ -88,16 +92,47 @@ public class OJSolution {
         this.status = status;
     }
 
+    public static List<LanguageType> getSupportedLanguageList() {
+        List<LanguageType> languageTypes = Arrays.asList(LanguageType.values());
+        return new ArrayList<LanguageType>(languageTypes.subList(1, languageTypes.size() - 1));
+    }
+
     public enum LanguageType {
-        ANY,
-        GCC,
-        GPP,
-        C,
-        CPP,
-        PASCAL,
-        JAVA,
-        FORTRAN,
-        PYTHON,
+        ANY ("", ""),
+        GCC ("GCC", "GNU C"),
+        GPP ("G++", "GNU C++"),
+        C ("VC", "Microsoft Visual C"),
+        CPP ("VC++", "Microsoft Visual C++"),
+        PASCAL ("Pascal"),
+        JAVA ("Java"),
+        FORTRAN ("Fortran"),
+        PYTHON ("Python");
+
+        private String literalFullName;
+        private String literalShortName;
+
+        LanguageType(String literalName) {
+            this.literalFullName = literalName;
+            this.literalShortName = literalName;
+        }
+
+        LanguageType(String literalShortName, String literalFullName) {
+            this.literalShortName = literalShortName;
+            this.literalFullName = literalFullName;
+        }
+
+        public String getLiteralFullName() {
+            return literalFullName;
+        }
+
+        public String getLiteralShortName() {
+            return literalShortName;
+        }
+
+        @Override
+        public String toString() {
+            return literalShortName;
+        }
     }
 
     public enum Status {

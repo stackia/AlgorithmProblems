@@ -30,6 +30,7 @@
     <string name="problem_output_label">输出描述</string>
     <string name="problem_sample_input_label">输入样例</string>
     <string name="problem_sample_output_label">输出样例</string>
+    <string name="problem_code_area_label">答题区</string>
 
     <string name="login_via_hdu_account_hint">请使用你的杭电OJ帐号登录。如果你还没有，可以前往 http://acm.hdu.edu.cn 进行注册。</string>
     <string name="login_username_placeholder">用户名</string>

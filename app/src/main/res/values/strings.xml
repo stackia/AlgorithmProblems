@@ -30,6 +30,7 @@
     <string name="problem_output_label">Output</string>
     <string name="problem_sample_input_label">Sample Input</string>
     <string name="problem_sample_output_label">Sample Output</string>
+    <string name="problem_code_area_label">Code Area</string>
 
     <string name="login_via_hdu_account_hint">You can use your HDU OJ account to login. You can register one at http://acm.hdu.edu.cn if you do not have.</string>
     <string name="login_username_placeholder">Username</string>
