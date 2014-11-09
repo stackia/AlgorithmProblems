@@ -3,6 +3,7 @@ package com.teamabcd.algorithmproblems;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -21,6 +22,8 @@ import com.teamabcd.module.ojclient.OJSolutionSubmitter;
 public class MainActivity extends Activity implements NavigationBarHandler, OJClientHolder {
 
     public final static String CURRENT_TAB_TAG = "CURRENT_TAB";
+    public final static int REQUEST_CODE_OJ_ACCOUNT = 1;
+    public final static String INTENT_EXTRA_REQUESTER_FRAGMENT_ID = "REQUESTER_FRAGMENT_ID";
 
     private TabEnum currentTab = TabEnum.Undefined;
     private ProblemArchiveFragment problemArchiveFragment = null;
@@ -76,6 +79,32 @@ public class MainActivity extends Activity implements NavigationBarHandler, OJCl
                 doubleBackToExitPressedOnce = false;
             }
         }, 2000);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case REQUEST_CODE_OJ_ACCOUNT:
+                if (resultCode == LoginActivity.RESULT_CODE_LOGIN_SUCCESSFUL) {
+                    int fragmentId = data.getIntExtra(INTENT_EXTRA_REQUESTER_FRAGMENT_ID, -1);
+                    if (fragmentId != -1) {
+                        try {
+                            LoginActivity.OnLoginListener onLoginListener = (LoginActivity.OnLoginListener) getFragmentManager().findFragmentById(fragmentId);
+                            onLoginListener.onLogin();
+                        } catch (ClassCastException ignored) {
+                        }
+                    }
+                }
+                break;
+        }
+    }
+
+    public void startLoginActivity(int requesterFragmentId) {
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.putExtra(INTENT_EXTRA_REQUESTER_FRAGMENT_ID, requesterFragmentId);
+        LoginActivity.mainActivity = this;
+        startActivityForResult(intent, REQUEST_CODE_OJ_ACCOUNT);
     }
 
     private void setSelectedTabButton(TabEnum tab) {

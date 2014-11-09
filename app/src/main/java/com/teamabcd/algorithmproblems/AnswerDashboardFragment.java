@@ -1,14 +1,13 @@
 package com.teamabcd.algorithmproblems;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-public class AnswerDashboardFragment extends SlidingFragment implements View.OnClickListener {
+public class AnswerDashboardFragment extends SlidingFragment implements View.OnClickListener, LoginActivity.OnLoginListener {
 
     public static AnswerDashboardFragment newInstance() {
         AnswerDashboardFragment fragment = new AnswerDashboardFragment();
@@ -25,17 +24,17 @@ public class AnswerDashboardFragment extends SlidingFragment implements View.OnC
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_answer_dashboard, container, false);
-        Button testLoginEntrance = (Button) view.findViewById(R.id.testLoginEntrance);
-        testLoginEntrance.setOnClickListener(this);
+        Button loginButton = (Button) view.findViewById(R.id.loginButton);
+        loginButton.setOnClickListener(this);
         return view;
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.testLoginEntrance:
-                Intent intent = new Intent(getActivity(), LoginActivity.class);
-                startActivity(intent);
+            case R.id.loginButton:
+                MainActivity mainActivity = (MainActivity) getActivity();
+                mainActivity.startLoginActivity(getId());
                 break;
         }
     }
@@ -43,5 +42,10 @@ public class AnswerDashboardFragment extends SlidingFragment implements View.OnC
     @Override
     public int getNavigationBarTitleResource() {
         return R.string.navigation_bar_title_my_answer;
+    }
+
+    @Override
+    public void onLogin() {
+
     }
 }
