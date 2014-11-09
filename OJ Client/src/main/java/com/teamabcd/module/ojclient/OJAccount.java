@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * Project: Algorithm Problems
- * Created by: Stackia<jsq2627@gmail.com>
+ * Created by: Stackia <jsq2627@gmail.com>
  * Date: 10/14/14
  */
 public class OJAccount {

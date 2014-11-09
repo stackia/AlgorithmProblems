@@ -12,6 +12,11 @@ import com.teamabcd.algorithmproblems.Activity.MainActivity;
 import com.teamabcd.algorithmproblems.CustomView.SlidingFragment;
 import com.teamabcd.algorithmproblems.R;
 
+/**
+ * Project: Algorithm Problems
+ * Created by: Stackia <jsq2627@gmail.com>
+ * Date: 11/9/14
+ */
 public class AnswerDashboardFragment extends SlidingFragment implements View.OnClickListener, LoginActivity.OnLoginListener {
 
     public static AnswerDashboardFragment newInstance() {

@@ -11,6 +11,11 @@ import com.teamabcd.algorithmproblems.CustomBackStackController.FragmentBackStac
 import com.teamabcd.algorithmproblems.MyAnswerTab.AnswerDashboardFragment;
 import com.teamabcd.algorithmproblems.R;
 
+/**
+ * Project: Algorithm Problems
+ * Created by: Stackia <jsq2627@gmail.com>
+ * Date: 11/3/14
+ */
 public class MyAnswerFragment extends Fragment {
 
     public final static String tag = "MY_ANSWER_FRAGMENT";

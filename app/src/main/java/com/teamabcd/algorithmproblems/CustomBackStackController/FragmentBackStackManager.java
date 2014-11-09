@@ -9,6 +9,11 @@ import com.teamabcd.algorithmproblems.R;
 
 import java.util.Stack;
 
+/**
+ * Project: Algorithm Problems
+ * Created by: Stackia <jsq2627@gmail.com>
+ * Date: 11/4/14
+ */
 public class FragmentBackStackManager {
 
     private NavigationBarHandler navigationBarHandler = null;

@@ -24,6 +24,11 @@ import com.teamabcd.module.ojclient.OJClientHolder;
 import com.teamabcd.module.ojclient.OJProblemFetcher;
 import com.teamabcd.module.ojclient.OJSolutionSubmitter;
 
+/**
+ * Project: Algorithm Problems
+ * Created by: Stackia <jsq2627@gmail.com>
+ * Date: 11/3/14
+ */
 public class MainActivity extends Activity implements FragmentBackStackManager.NavigationBarHandler, OJClientHolder {
 
     public final static String CURRENT_TAB_TAG = "CURRENT_TAB";

@@ -6,6 +6,11 @@ import android.util.AttributeSet;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 
+/**
+ * Project: Algorithm Problems
+ * Created by: Stackia <jsq2627@gmail.com>
+ * Date: 11/6/14
+ */
 public class SlidingFrameLayout extends FrameLayout {
 
     private Point screenSize = new Point();

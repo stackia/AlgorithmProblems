@@ -11,6 +11,11 @@ import com.teamabcd.algorithmproblems.R;
 
 import fr.castorflex.android.circularprogressbar.CircularProgressBar;
 
+/**
+ * Project: Algorithm Problems
+ * Created by: Stackia <jsq2627@gmail.com>
+ * Date: 11/8/14
+ */
 public class LoadMoreListView extends ListView implements AbsListView.OnScrollListener {
 
     private View footerView;

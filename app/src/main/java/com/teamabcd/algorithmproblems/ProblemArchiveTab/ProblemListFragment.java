@@ -28,6 +28,11 @@ import java.util.List;
 
 import fr.castorflex.android.circularprogressbar.CircularProgressBar;
 
+/**
+ * Project: Algorithm Problems
+ * Created by: Stackia <jsq2627@gmail.com>
+ * Date: 11/4/14
+ */
 public class ProblemListFragment extends SlidingFragment implements ListView.OnItemClickListener, View.OnClickListener, LoadMoreListView.OnLoadMoreListener {
 
     private List<OJProblem> problemList = new ArrayList<OJProblem>();

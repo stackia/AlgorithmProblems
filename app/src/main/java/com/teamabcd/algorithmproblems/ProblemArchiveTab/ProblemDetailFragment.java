@@ -19,6 +19,11 @@ import com.teamabcd.module.ojclient.OJProblem;
 
 import fr.castorflex.android.circularprogressbar.CircularProgressBar;
 
+/**
+ * Project: Algorithm Problems
+ * Created by: Stackia <jsq2627@gmail.com>
+ * Date: 11/5/14
+ */
 public class ProblemDetailFragment extends SlidingFragment implements View.OnClickListener {
 
     private OJProblem problem;

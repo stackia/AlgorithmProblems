@@ -8,6 +8,11 @@ import android.os.Bundle;
 
 import com.teamabcd.algorithmproblems.CustomBackStackController.FragmentBackStackManager;
 
+/**
+ * Project: Algorithm Problems
+ * Created by: Stackia <jsq2627@gmail.com>
+ * Date: 11/6/14
+ */
 abstract public class SlidingFragment extends Fragment {
 
     private FragmentBackStackManager.NavigationBarHandler navigationBarHandler;

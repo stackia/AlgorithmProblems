@@ -14,6 +14,11 @@ import com.teamabcd.module.ojclient.OJAccountOperator;
 
 import fr.castorflex.android.circularprogressbar.CircularProgressBar;
 
+/**
+ * Project: Algorithm Problems
+ * Created by: Stackia <jsq2627@gmail.com>
+ * Date: 11/9/14
+ */
 public class LoginActivity extends Activity {
 
     public static final String INTENT_EXTRA_OJ_ACCOUNT = "OJ_ACCOUNT";
