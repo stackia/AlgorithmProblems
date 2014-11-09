@@ -108,12 +108,13 @@ public class LoginActivity extends Activity {
                 Toast.makeText(LoginActivity.this, R.string.login_failed, Toast.LENGTH_SHORT).show();
                 return;
             }
-            if (!isDestroyed()) {
+            try {
                 if (LoginActivity.mainActivity != null) {
                     LoginActivity.mainActivity.setAccount(account);
                 }
                 setResult(RESULT_CODE_LOGIN_SUCCESSFUL, getIntent());
                 finish();
+            } catch (Exception ignored) {
             }
         }
     }
