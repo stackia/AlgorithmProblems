@@ -1,18 +1,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/pane_background"
-    tools:context="com.teamabcd.algorithmproblems.MainActivity">
+    android:orientation="vertical"
+    tools:context="com.teamabcd.algorithmproblems.Activity.MainActivity">
 
     <!-- Navigation Bar -->
     <RelativeLayout
+        android:id="@+id/navigationBar"
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:layout_alignParentTop="true"
-        android:background="#31C0ED"
-        android:id="@+id/navigationBar">
+        android:background="#31C0ED">
 
         <ImageButton
             android:id="@+id/navigationBarBackButton"
@@ -20,28 +20,28 @@
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
+            android:background="@android:color/transparent"
+            android:onClick="onBackButtonClicked"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/back_button_icon"
-            android:onClick="onBackButtonClicked" />
+            android:src="@drawable/back_button_icon" />
 
         <TextView
             android:id="@+id/navigationBarTitle"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:textSize="17sp"
             android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="@string/navigation_bar_default_title"
             android:textColor="#FFFFFF"
-            android:text="@string/navigation_bar_default_title" />
+            android:textSize="17sp" />
 
         <LinearLayout
             android:id="@+id/navigationBarActionLayout"
-            android:layout_alignParentRight="true"
-            android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:orientation="horizontal" />
     </RelativeLayout>
 
     <!-- Tab Frame Container -->
@@ -49,55 +49,55 @@
         android:id="@+id/tabFrameContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/navigationBar"
-        android:layout_above="@+id/tabBar" />
+        android:layout_above="@+id/tabBar"
+        android:layout_below="@+id/navigationBar" />
 
     <!-- Tab Bar -->
     <LinearLayout
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true"
+        android:id="@+id/tabBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:paddingTop="2dp"
+        android:layout_alignParentBottom="true"
         android:background="@drawable/tab_bar_border"
-        android:id="@+id/tabBar">
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingTop="2dp">
 
-            <TextView
-                android:id="@+id/tabBarProblemArchiveButton"
-                android:drawableTop="@drawable/tab_bar_button_problem_archive"
-                android:drawablePadding="5dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="20dp"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
-                android:paddingTop="4dp"
-                android:paddingBottom="2dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textColor="@color/tab_bar_button_text_normal"
-                android:text="@string/tab_bar_button_problem_archive_title"
-                android:clickable="true"
-                android:onClick="onProblemArchiveTabButtonClicked" />
+        <TextView
+            android:id="@+id/tabBarProblemArchiveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="35dp"
+            android:clickable="true"
+            android:drawablePadding="5dp"
+            android:drawableTop="@drawable/tab_bar_button_problem_archive"
+            android:onClick="onProblemArchiveTabButtonClicked"
+            android:paddingBottom="2dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="4dp"
+            android:text="@string/tab_bar_button_problem_archive_title"
+            android:textColor="@color/tab_bar_button_text_normal"
+            android:textSize="12sp" />
 
-            <TextView
-                android:id="@+id/tabBarMyAnswersButton"
-                android:drawableTop="@drawable/tab_bar_button_my_answers"
-                android:drawablePadding="5dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="10dp"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
-                android:paddingTop="4dp"
-                android:paddingBottom="2dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textColor="@color/tab_bar_button_text_normal"
-                android:text="@string/tab_bar_button_my_answer_title"
-                android:clickable="true"
-                android:onClick="onMyAnswerTabButtonClicked" />
+        <TextView
+            android:id="@+id/tabBarMyAnswersButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="10dp"
+            android:clickable="true"
+            android:drawablePadding="5dp"
+            android:drawableTop="@drawable/tab_bar_button_my_answers"
+            android:onClick="onMyAnswerTabButtonClicked"
+            android:paddingBottom="2dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="4dp"
+            android:text="@string/tab_bar_button_my_answer_title"
+            android:textColor="@color/tab_bar_button_text_normal"
+            android:textSize="12sp" />
     </LinearLayout>
 
 </RelativeLayout>

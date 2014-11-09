@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.teamabcd.algorithmproblems.SlidingFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.teamabcd.algorithmproblems.CustomView.SlidingFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/pane_background"
-    tools:context="com.teamabcd.algorithmproblems.ProblemListFragment">
+    tools:context="com.teamabcd.algorithmproblems.ProblemArchiveTab.ProblemListFragment">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
+        android:orientation="vertical"
         android:padding="14dp">
 
         <TextView
@@ -18,28 +18,27 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
+            android:text="@string/network_operation_timeout"
             android:textColor="@color/tab_bar_button_text_highlighted"
-            android:visibility="gone"
-            android:text="@string/network_operation_timeout" />
+            android:visibility="gone" />
 
-        <fr.castorflex.android.circularprogressbar.CircularProgressBar
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+        <fr.castorflex.android.circularprogressbar.CircularProgressBar xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/loadingProgressBar"
             android:layout_width="@dimen/circle_progress_bar_width"
             android:layout_height="@dimen/circle_progress_bar_height"
             android:indeterminate="true"
+            android:visibility="gone"
             app:cpb_color="@color/circle_progress_bar_color"
-            app:cpb_rotation_speed="1.0"
-            app:cpb_sweep_speed="1.0"
-            app:cpb_stroke_width="@dimen/circle_progress_bar_stroke"
-            app:cpb_min_sweep_angle="10"
             app:cpb_max_sweep_angle="300"
-            android:visibility="gone" />
+            app:cpb_min_sweep_angle="10"
+            app:cpb_rotation_speed="1.0"
+            app:cpb_stroke_width="@dimen/circle_progress_bar_stroke"
+            app:cpb_sweep_speed="1.0" />
     </LinearLayout>
 
-    <com.teamabcd.algorithmproblems.LoadMoreListView
+    <com.teamabcd.algorithmproblems.CustomView.LoadMoreListView
         android:id="@+id/problemListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@null" />
-</com.teamabcd.algorithmproblems.SlidingFrameLayout>
+</com.teamabcd.algorithmproblems.CustomView.SlidingFrameLayout>

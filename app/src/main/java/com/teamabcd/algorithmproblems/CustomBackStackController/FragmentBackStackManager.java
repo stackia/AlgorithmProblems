@@ -1,8 +1,11 @@
-package com.teamabcd.algorithmproblems;
+package com.teamabcd.algorithmproblems.CustomBackStackController;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+
+import com.teamabcd.algorithmproblems.CustomView.SlidingFragment;
+import com.teamabcd.algorithmproblems.R;
 
 import java.util.Stack;
 
@@ -102,5 +105,22 @@ public class FragmentBackStackManager {
         } else {
             navigationBarHandler.setBackButtonEnabled(false, animated);
         }
+    }
+
+    public static interface NavigationBarHandler {
+
+        public FragmentBackStackManager getCurrentBackStack();
+
+        public void setCurrentBackStack(FragmentBackStackManager backStack);
+
+        public boolean isBackButtonEnabled();
+
+        public void setBackButtonEnabled(boolean enabled, boolean animated);
+
+        public void setNavigationBarTitle(int resId, boolean animated);
+
+        public String getNavigationBarTitle();
+
+        public void setNavigationBarTitle(String title, boolean animated);
     }
 }

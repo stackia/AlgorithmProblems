@@ -1,4 +1,4 @@
-package com.teamabcd.algorithmproblems;
+package com.teamabcd.algorithmproblems.ProblemArchiveTab;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -15,6 +15,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.teamabcd.algorithmproblems.Activity.MainActivity;
+import com.teamabcd.algorithmproblems.CustomBackStackController.FragmentBackStackManager;
+import com.teamabcd.algorithmproblems.CustomView.LoadMoreListView;
+import com.teamabcd.algorithmproblems.CustomView.SlidingFragment;
+import com.teamabcd.algorithmproblems.R;
+import com.teamabcd.module.ojclient.OJClientHolder;
 import com.teamabcd.module.ojclient.OJProblem;
 
 import java.util.ArrayList;

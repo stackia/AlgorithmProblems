@@ -1,4 +1,4 @@
-package com.teamabcd.algorithmproblems;
+package com.teamabcd.algorithmproblems.Activity;
 
 import android.app.Activity;
 import android.app.FragmentManager;
@@ -14,12 +14,17 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.teamabcd.algorithmproblems.CustomBackStackController.FragmentBackStackManager;
+import com.teamabcd.algorithmproblems.R;
+import com.teamabcd.algorithmproblems.TabController.MyAnswerFragment;
+import com.teamabcd.algorithmproblems.TabController.ProblemArchiveFragment;
 import com.teamabcd.module.ojclient.OJAccount;
 import com.teamabcd.module.ojclient.OJAccountOperator;
+import com.teamabcd.module.ojclient.OJClientHolder;
 import com.teamabcd.module.ojclient.OJProblemFetcher;
 import com.teamabcd.module.ojclient.OJSolutionSubmitter;
 
-public class MainActivity extends Activity implements NavigationBarHandler, OJClientHolder {
+public class MainActivity extends Activity implements FragmentBackStackManager.NavigationBarHandler, OJClientHolder {
 
     public final static String CURRENT_TAB_TAG = "CURRENT_TAB";
     public final static int REQUEST_CODE_OJ_ACCOUNT = 1;
@@ -309,7 +314,7 @@ public class MainActivity extends Activity implements NavigationBarHandler, OJCl
         MyAnswer,
     }
 
-    enum FetchState {
+    public enum FetchState {
         Working,
         Failed,
         Successful,

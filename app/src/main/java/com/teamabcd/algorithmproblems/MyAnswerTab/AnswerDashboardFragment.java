@@ -1,4 +1,4 @@
-package com.teamabcd.algorithmproblems;
+package com.teamabcd.algorithmproblems.MyAnswerTab;
 
 
 import android.os.Bundle;
@@ -6,6 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import com.teamabcd.algorithmproblems.Activity.LoginActivity;
+import com.teamabcd.algorithmproblems.Activity.MainActivity;
+import com.teamabcd.algorithmproblems.CustomView.SlidingFragment;
+import com.teamabcd.algorithmproblems.R;
 
 public class AnswerDashboardFragment extends SlidingFragment implements View.OnClickListener, LoginActivity.OnLoginListener {
 

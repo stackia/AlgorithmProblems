@@ -1,4 +1,4 @@
-package com.teamabcd.algorithmproblems;
+package com.teamabcd.algorithmproblems.Utils;
 
 import android.text.Html;
 import android.text.Spanned;

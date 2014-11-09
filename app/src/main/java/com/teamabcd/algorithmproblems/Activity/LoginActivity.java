@@ -1,4 +1,4 @@
-package com.teamabcd.algorithmproblems;
+package com.teamabcd.algorithmproblems.Activity;
 
 import android.app.Activity;
 import android.os.AsyncTask;
@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.teamabcd.algorithmproblems.R;
 import com.teamabcd.module.ojclient.OJAccount;
 import com.teamabcd.module.ojclient.OJAccountOperator;
 

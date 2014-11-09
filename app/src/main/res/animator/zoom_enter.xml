@@ -2,21 +2,19 @@
 
 <set xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <objectAnimator
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <objectAnimator xmlns:android="http://schemas.android.com/apk/res/android"
+        android:duration="@android:integer/config_mediumAnimTime"
         android:interpolator="@android:anim/accelerate_decelerate_interpolator"
         android:propertyName="scaleX"
-        android:valueType="floatType"
         android:valueFrom="0.7"
         android:valueTo="1.0"
-        android:duration="@android:integer/config_mediumAnimTime" />
+        android:valueType="floatType" />
 
-    <objectAnimator
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <objectAnimator xmlns:android="http://schemas.android.com/apk/res/android"
+        android:duration="@android:integer/config_mediumAnimTime"
         android:interpolator="@android:anim/accelerate_decelerate_interpolator"
         android:propertyName="scaleY"
-        android:valueType="floatType"
         android:valueFrom="0.7"
         android:valueTo="1.0"
-        android:duration="@android:integer/config_mediumAnimTime" />
+        android:valueType="floatType" />
 </set>

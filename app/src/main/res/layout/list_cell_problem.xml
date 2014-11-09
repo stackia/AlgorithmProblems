@@ -14,14 +14,14 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginTop="6dp"
-            android:src="@drawable/problem_card_background"
-            android:scaleType="fitXY"/>
+            android:scaleType="fitXY"
+            android:src="@drawable/problem_card_background" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="63dp"
-            android:src="@drawable/problem_id_decoration"
-            android:scaleType="fitXY" />
+            android:scaleType="fitXY"
+            android:src="@drawable/problem_id_decoration" />
 
         <TextView
             android:id="@+id/problemIdTextView"
@@ -29,47 +29,47 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:gravity="center"
+            android:text="@string/problem_default_id"
             android:textColor="#FFFFFF"
-            android:typeface="sans"
-            android:textStyle="italic"
             android:textSize="16sp"
-            android:text="@string/problem_default_id" />
+            android:textStyle="italic"
+            android:typeface="sans" />
 
         <TextView
             android:id="@+id/problemTitleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            android:layout_marginLeft="64dp"
-            android:singleLine="true"
-            android:textSize="15sp"
-            android:text="@string/problem_default_title"
             android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@+id/problemStateLayout" />
+            android:layout_marginLeft="64dp"
+            android:layout_marginTop="14dp"
+            android:layout_toLeftOf="@+id/problemStateLayout"
+            android:singleLine="true"
+            android:text="@string/problem_default_title"
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/problemStatisticsTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="37dp"
-            android:layout_marginLeft="64dp"
-            android:singleLine="true"
-            android:textSize="12sp"
-            android:textColor="#ffa8a8a8"
-            android:text="@string/problem_default_statistics"
             android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@+id/problemStateLayout" />
+            android:layout_marginLeft="64dp"
+            android:layout_marginTop="37dp"
+            android:layout_toLeftOf="@+id/problemStateLayout"
+            android:singleLine="true"
+            android:text="@string/problem_default_statistics"
+            android:textColor="#ffa8a8a8"
+            android:textSize="12sp" />
 
         <LinearLayout
-            android:orientation="vertical"
+            android:id="@+id/problemStateLayout"
             android:layout_width="@dimen/problem_state_layout_width"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:layout_marginTop="5dp"
-            android:paddingRight="8dp"
-            android:paddingLeft="8dp"
             android:layout_alignParentRight="true"
-            android:id="@+id/problemStateLayout">
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp">
 
             <ImageView
                 android:id="@+id/problemStateIconView"
@@ -82,8 +82,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:textSize="10sp"
-                android:text="@string/problem_state_untried"/>
+                android:text="@string/problem_state_untried"
+                android:textSize="10sp" />
         </LinearLayout>
     </RelativeLayout>
 </FrameLayout>

@@ -1,4 +1,4 @@
-package com.teamabcd.algorithmproblems;
+package com.teamabcd.algorithmproblems.CustomView;
 
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
@@ -6,15 +6,17 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 
+import com.teamabcd.algorithmproblems.CustomBackStackController.FragmentBackStackManager;
+
 abstract public class SlidingFragment extends Fragment {
 
-    private NavigationBarHandler navigationBarHandler;
+    private FragmentBackStackManager.NavigationBarHandler navigationBarHandler;
     private boolean noTitleAnimationNextTime = false;
     private boolean animating = false;
 
     abstract public int getNavigationBarTitleResource();
 
-    public NavigationBarHandler getNavigationBarHandler() {
+    public FragmentBackStackManager.NavigationBarHandler getNavigationBarHandler() {
         return navigationBarHandler;
     }
 
@@ -87,7 +89,7 @@ abstract public class SlidingFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            navigationBarHandler = (NavigationBarHandler) activity;
+            navigationBarHandler = (FragmentBackStackManager.NavigationBarHandler) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException("Activity must implement NavigationBarHandler interface.");
         }

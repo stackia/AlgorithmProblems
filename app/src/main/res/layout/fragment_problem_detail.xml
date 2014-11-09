@@ -1,42 +1,41 @@
-<com.teamabcd.algorithmproblems.SlidingFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.teamabcd.algorithmproblems.CustomView.SlidingFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/pane_background"
-    tools:context="com.teamabcd.algorithmproblems.ProblemDetailFragment">
+    tools:context="com.teamabcd.algorithmproblems.ProblemArchiveTab.ProblemDetailFragment">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
-        android:paddingTop="@dimen/activity_vertical_margin"
+        android:orientation="vertical"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin">
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
 
         <TextView
             android:id="@+id/fetchErrorTextView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
+            android:text="@string/network_operation_timeout"
             android:textColor="@color/tab_bar_button_text_highlighted"
-            android:visibility="gone"
-            android:text="@string/network_operation_timeout" />
+            android:visibility="gone" />
 
-        <fr.castorflex.android.circularprogressbar.CircularProgressBar
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+        <fr.castorflex.android.circularprogressbar.CircularProgressBar xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/loadingProgressBar"
             android:layout_width="@dimen/circle_progress_bar_width"
             android:layout_height="@dimen/circle_progress_bar_height"
             android:indeterminate="true"
+            android:visibility="gone"
             app:cpb_color="@color/circle_progress_bar_color"
-            app:cpb_rotation_speed="1.0"
-            app:cpb_sweep_speed="1.0"
-            app:cpb_stroke_width="@dimen/circle_progress_bar_stroke"
-            app:cpb_min_sweep_angle="10"
             app:cpb_max_sweep_angle="300"
-            android:visibility="gone" />
+            app:cpb_min_sweep_angle="10"
+            app:cpb_rotation_speed="1.0"
+            app:cpb_stroke_width="@dimen/circle_progress_bar_stroke"
+            app:cpb_sweep_speed="1.0" />
     </LinearLayout>
 
     <ScrollView
@@ -45,40 +44,41 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:padding="14dp">
 
             <LinearLayout
                 android:id="@+id/problemDetailDescriptionLayout"
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/problem_detail_label_height"
+                    android:drawableLeft="@drawable/problem_description_label_icon"
+                    android:drawablePadding="8dp"
                     android:gravity="center_vertical"
                     android:text="@string/problem_description_label"
-                    android:textColor="@color/problem_label_text"
-                    android:drawableLeft="@drawable/problem_description_label_icon"
-                    android:drawablePadding="8dp"/>
+                    android:textColor="@color/problem_label_text" />
 
                 <TextView
                     android:id="@+id/problemDetailDescriptionTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/problem_detail_text_margin_top"
                     android:layout_marginBottom="@dimen/problem_detail_text_margin_bottom"
                     android:layout_marginLeft="@dimen/problem_detail_text_margin_left"
-                    android:layout_marginRight="@dimen/problem_detail_text_margin_right" />
+                    android:layout_marginRight="@dimen/problem_detail_text_margin_right"
+                    android:layout_marginTop="@dimen/problem_detail_text_margin_top" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/problemDetailInputLayout"
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -91,17 +91,17 @@
                     android:id="@+id/problemDetailInputTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/problem_detail_text_margin_top"
                     android:layout_marginBottom="@dimen/problem_detail_text_margin_bottom"
                     android:layout_marginLeft="@dimen/problem_detail_text_margin_left"
-                    android:layout_marginRight="@dimen/problem_detail_text_margin_right" />
+                    android:layout_marginRight="@dimen/problem_detail_text_margin_right"
+                    android:layout_marginTop="@dimen/problem_detail_text_margin_top" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/problemDetailOutputLayout"
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -114,17 +114,17 @@
                     android:id="@+id/problemDetailOutputTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/problem_detail_text_margin_top"
                     android:layout_marginBottom="@dimen/problem_detail_text_margin_bottom"
                     android:layout_marginLeft="@dimen/problem_detail_text_margin_left"
-                    android:layout_marginRight="@dimen/problem_detail_text_margin_right" />
+                    android:layout_marginRight="@dimen/problem_detail_text_margin_right"
+                    android:layout_marginTop="@dimen/problem_detail_text_margin_top" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/problemDetailSampleInputLayout"
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -137,16 +137,16 @@
                     android:id="@+id/problemDetailSampleInputTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/problem_detail_text_margin_bottom"
+                    android:layout_marginLeft="@dimen/problem_detail_text_margin_left"
+                    android:layout_marginRight="@dimen/problem_detail_text_margin_right"
+                    android:layout_marginTop="@dimen/problem_detail_text_margin_top"
                     android:background="@drawable/problem_sample_text_view_border"
-                    android:typeface="monospace"
-                    android:paddingTop="6dp"
                     android:paddingBottom="6dp"
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp"
-                    android:layout_marginTop="@dimen/problem_detail_text_margin_top"
-                    android:layout_marginBottom="@dimen/problem_detail_text_margin_bottom"
-                    android:layout_marginLeft="@dimen/problem_detail_text_margin_left"
-                    android:layout_marginRight="@dimen/problem_detail_text_margin_right" />
+                    android:paddingTop="6dp"
+                    android:typeface="monospace" />
             </LinearLayout>
 
             <TextView
@@ -160,16 +160,16 @@
                 android:id="@+id/problemDetailSampleOutputTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/problem_detail_text_margin_bottom"
+                android:layout_marginLeft="@dimen/problem_detail_text_margin_left"
+                android:layout_marginRight="@dimen/problem_detail_text_margin_right"
+                android:layout_marginTop="@dimen/problem_detail_text_margin_top"
                 android:background="@drawable/problem_sample_text_view_border"
-                android:typeface="monospace"
-                android:paddingTop="6dp"
                 android:paddingBottom="6dp"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
-                android:layout_marginTop="@dimen/problem_detail_text_margin_top"
-                android:layout_marginBottom="@dimen/problem_detail_text_margin_bottom"
-                android:layout_marginLeft="@dimen/problem_detail_text_margin_left"
-                android:layout_marginRight="@dimen/problem_detail_text_margin_right" />
+                android:paddingTop="6dp"
+                android:typeface="monospace" />
         </LinearLayout>
     </ScrollView>
-</com.teamabcd.algorithmproblems.SlidingFrameLayout>
+</com.teamabcd.algorithmproblems.CustomView.SlidingFrameLayout>

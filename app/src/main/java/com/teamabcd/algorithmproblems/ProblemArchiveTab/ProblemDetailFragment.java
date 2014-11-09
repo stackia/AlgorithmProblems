@@ -1,4 +1,4 @@
-package com.teamabcd.algorithmproblems;
+package com.teamabcd.algorithmproblems.ProblemArchiveTab;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -10,6 +10,11 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.teamabcd.algorithmproblems.Activity.MainActivity;
+import com.teamabcd.algorithmproblems.CustomView.SlidingFragment;
+import com.teamabcd.algorithmproblems.R;
+import com.teamabcd.algorithmproblems.Utils.HtmlUtils;
+import com.teamabcd.module.ojclient.OJClientHolder;
 import com.teamabcd.module.ojclient.OJProblem;
 
 import fr.castorflex.android.circularprogressbar.CircularProgressBar;

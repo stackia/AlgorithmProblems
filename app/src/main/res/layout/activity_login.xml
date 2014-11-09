@@ -1,27 +1,27 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#5CBBF3"
-    tools:context="com.teamabcd.algorithmproblems.LoginActivity">
+    android:orientation="vertical"
+    tools:context="com.teamabcd.algorithmproblems.Activity.LoginActivity">
 
     <ImageButton
         android:id="@+id/navigationBarBackButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="18dp"
         android:background="@android:color/transparent"
-        android:src="@drawable/back_button_icon"
-        android:onClick="onBackButtonClicked" />
+        android:onClick="onBackButtonClicked"
+        android:padding="18dp"
+        android:src="@drawable/back_button_icon" />
 
     <LinearLayout
         android:id="@+id/loginLayout"
-        android:orientation="vertical"
-        android:layout_centerInParent="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:gravity="center_horizontal"
+        android:orientation="vertical"
         android:paddingLeft="40dp"
         android:paddingRight="40dp">
 
@@ -31,49 +31,48 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:background="@drawable/login_edit_text_background"
+            android:hint="@string/login_username_placeholder"
             android:padding="10dp"
-            android:singleLine="true"
-            android:hint="@string/login_username_placeholder" />
+            android:singleLine="true" />
 
         <EditText
             android:id="@+id/passwordEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="14dp"
-            android:hint="@string/login_password_placeholder"
             android:background="@drawable/login_edit_text_background"
-            android:padding="10dp"
-            android:inputType="textPassword" />
+            android:hint="@string/login_password_placeholder"
+            android:inputType="textPassword"
+            android:padding="10dp" />
 
         <LinearLayout
-            android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="42dp">
+            android:layout_height="42dp"
+            android:gravity="center">
 
-            <fr.castorflex.android.circularprogressbar.CircularProgressBar
-                xmlns:app="http://schemas.android.com/apk/res-auto"
+            <fr.castorflex.android.circularprogressbar.CircularProgressBar xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/loadingProgressBar"
                 android:layout_width="@dimen/circle_progress_bar_width"
                 android:layout_height="@dimen/circle_progress_bar_height"
                 android:indeterminate="true"
+                android:visibility="gone"
                 app:cpb_color="#FFFFFF"
-                app:cpb_rotation_speed="1.0"
-                app:cpb_sweep_speed="1.0"
-                app:cpb_stroke_width="@dimen/circle_progress_bar_stroke"
-                app:cpb_min_sweep_angle="10"
                 app:cpb_max_sweep_angle="300"
-                android:visibility="gone" />
+                app:cpb_min_sweep_angle="10"
+                app:cpb_rotation_speed="1.0"
+                app:cpb_stroke_width="@dimen/circle_progress_bar_stroke"
+                app:cpb_sweep_speed="1.0" />
 
             <Button
                 android:id="@+id/loginButton"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:background="@drawable/login_button_background"
+                android:onClick="onLoginButtonClicked"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:textColor="#FFFFFF"
-                android:background="@drawable/login_button_background"
                 android:text="@string/login_button_text"
-                android:onClick="onLoginButtonClicked" />
+                android:textColor="#FFFFFF" />
         </LinearLayout>
     </LinearLayout>
 
@@ -81,9 +80,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/loginLayout"
+        android:paddingBottom="20dp"
         android:paddingLeft="40dp"
         android:paddingRight="40dp"
-        android:paddingBottom="20dp"
-        android:textColor="#FFFFFF"
-        android:text="@string/login_via_hdu_account_hint" />
+        android:text="@string/login_via_hdu_account_hint"
+        android:textColor="#FFFFFF" />
 </RelativeLayout>

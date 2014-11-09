@@ -9,7 +9,9 @@
         </shape>
     </item>
 
-    <item android:bottom="2px" android:right="2px">
+    <item
+        android:bottom="2px"
+        android:right="2px">
         <shape android:shape="rectangle">
             <corners android:radius="1dp" />
             <solid android:color="#97D3F6" />

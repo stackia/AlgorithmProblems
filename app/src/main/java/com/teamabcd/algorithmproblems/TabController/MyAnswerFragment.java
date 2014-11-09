@@ -1,4 +1,4 @@
-package com.teamabcd.algorithmproblems;
+package com.teamabcd.algorithmproblems.TabController;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -6,6 +6,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.teamabcd.algorithmproblems.CustomBackStackController.FragmentBackStackManager;
+import com.teamabcd.algorithmproblems.MyAnswerTab.AnswerDashboardFragment;
+import com.teamabcd.algorithmproblems.R;
 
 public class MyAnswerFragment extends Fragment {
 
@@ -39,7 +43,7 @@ public class MyAnswerFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            NavigationBarHandler navigationBarHandler = (NavigationBarHandler) activity;
+            FragmentBackStackManager.NavigationBarHandler navigationBarHandler = (FragmentBackStackManager.NavigationBarHandler) activity;
             backStackManager.setNavigationBarHandler(navigationBarHandler);
             backStackManager.setFragmentManager(getFragmentManager());
         } catch (ClassCastException e) {
