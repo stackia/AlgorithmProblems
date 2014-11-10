@@ -32,8 +32,8 @@
             android:layout_marginBottom="8dp"
             android:background="@drawable/login_edit_text_background"
             android:hint="@string/login_username_placeholder"
-            android:padding="10dp"
             android:inputType="textVisiblePassword|textNoSuggestions"
+            android:padding="10dp"
             android:singleLine="true" />
 
         <EditText

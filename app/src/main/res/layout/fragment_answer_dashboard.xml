@@ -6,8 +6,46 @@
     tools:context="com.teamabcd.algorithmproblems.ProblemArchiveTab.ProblemDetailFragment">
 
     <RelativeLayout
+        android:id="@+id/tempAnswerDashboard"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/answerDashboardTempHint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="12dp"
+                android:layout_weight="1"
+                android:text="@string/answer_dashboard_temp_hint" />
+
+            <Button
+                android:id="@+id/answerDashboardTempRefreshButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:text="@string/answer_dashboard_temp_refresh_button" />
+        </LinearLayout>
+
+        <WebView
+            android:id="@+id/answerDashboardTempWebView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/answerDashboardTempHint" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/answerDashboardLoginLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
         <Button
             android:id="@+id/loginButton"

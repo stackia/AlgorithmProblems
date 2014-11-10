@@ -1,42 +1,34 @@
 package com.teamabcd.algorithmproblems.ProblemArchiveTab;
 
-import android.app.ActionBar;
 import android.content.Context;
-import android.content.res.Configuration;
-import android.graphics.Camera;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.AndroidCharacter;
 import android.text.Html;
-import android.util.TypedValue;
-import android.view.Choreographer;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.teamabcd.algorithmproblems.Activity.MainActivity;
+import com.teamabcd.algorithmproblems.CustomBackStackController.FragmentBackStackManager;
 import com.teamabcd.algorithmproblems.CustomView.SlidingFragment;
 import com.teamabcd.algorithmproblems.R;
 import com.teamabcd.algorithmproblems.Utils.HtmlUtils;
 import com.teamabcd.module.ojclient.OJClientHolder;
 import com.teamabcd.module.ojclient.OJProblem;
 import com.teamabcd.module.ojclient.OJSolution;
-
-import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.List;
 
 import fr.castorflex.android.circularprogressbar.CircularProgressBar;
 
@@ -45,10 +37,19 @@ import fr.castorflex.android.circularprogressbar.CircularProgressBar;
  * Created by: Stackia <jsq2627@gmail.com>
  * Date: 11/5/14
  */
-public class ProblemDetailFragment extends SlidingFragment implements View.OnClickListener, View.OnTouchListener {
+public class ProblemDetailFragment extends SlidingFragment implements View.OnClickListener, View.OnTouchListener, AdapterView.OnItemSelectedListener {
 
+    ProgramLanguageAdapter programLanguageAdapter;
+    OJClientHolder ojClientHolder;
+    // These variables are made global for performance consideration. Used in OnTouch listener.
+    RelativeLayout codeAreaLayout;
+    float codeAreaMeasureBaseTerm;
+    ViewGroup.LayoutParams codeAreaLayoutParams;
+    int codeAreaAdjustLineHeight;
+    int problemDetailLayoutHeight;
     private OJProblem problem;
     private MainActivity.FetchState fetchState = MainActivity.FetchState.Working;
+    private OJSolution.LanguageType solutionLanguage = OJSolution.LanguageType.ANY;
 
     public static ProblemDetailFragment newInstance(OJProblem problem) {
         ProblemDetailFragment fragment = new ProblemDetailFragment();
@@ -62,6 +63,14 @@ public class ProblemDetailFragment extends SlidingFragment implements View.OnCli
     @Override
     public int getNavigationBarTitleResource() {
         return R.string.navigation_bar_title_problem_detail;
+    }
+
+    @Override
+    public FragmentBackStackManager.NavigationBarHandler.NavigationBarActionButton getNavigationBarActionButton() {
+        FragmentBackStackManager.NavigationBarHandler.NavigationBarActionButton navigationBarActionButton = new FragmentBackStackManager.NavigationBarHandler.NavigationBarActionButton();
+        navigationBarActionButton.text = getString(R.string.navigation_bar_action_button_text_submit);
+        navigationBarActionButton.onClickListener = this;
+        return navigationBarActionButton;
     }
 
     @Override
@@ -100,8 +109,9 @@ public class ProblemDetailFragment extends SlidingFragment implements View.OnCli
         problemDetailSampleOutputTextView.setTypeface(typefaceSourceCodeProRegular);
 
         Spinner codeAreaLanguageSpinner = (Spinner) view.findViewById(R.id.problemCodeAreaLanguageSpanner);
-        ProgramLanguageAdapter programLanguageAdapter = new ProgramLanguageAdapter(getActivity());
+        programLanguageAdapter = new ProgramLanguageAdapter(getActivity());
         codeAreaLanguageSpinner.setAdapter(programLanguageAdapter);
+        codeAreaLanguageSpinner.setOnItemSelectedListener(this);
 
         return view;
     }
@@ -112,31 +122,60 @@ public class ProblemDetailFragment extends SlidingFragment implements View.OnCli
             case R.id.fetchErrorTextView:
                 startLoadDetailTask();
                 break;
+
+            case R.id.navigationBarActionButton:
+                try {
+                    OJClientHolder ojClientHolder = (OJClientHolder) getActivity();
+                    if (ojClientHolder.getAccount().isAnonymous()) {
+                        Toast.makeText(getActivity(), R.string.problem_submit_failed_login_first, Toast.LENGTH_SHORT).show();
+                    } else {
+                        startSolutionSubmitTask();
+                    }
+                } catch (ClassCastException e) {
+                    throw new ClassCastException("Activity must implement OJClientHolder");
+                }
+                break;
         }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        solutionLanguage = programLanguageAdapter.getItem(position);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
     }
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         if (v.getId() == R.id.problemCodeAreaAdjustLineTouchArea) {
             if (event.getAction() == MotionEvent.ACTION_MOVE) {
-                View view = getView();
-                if (view != null) {
-                    RelativeLayout codeAreaLayout = (RelativeLayout) view.findViewById(R.id.codeAreaLayout);
-                    RelativeLayout codeAreaAdjustLine = (RelativeLayout) view.findViewById(R.id.problemCodeAreaAdjustLine);
-                    RelativeLayout problemDetailLayout = (RelativeLayout) view.findViewById(R.id.problemDetailLayout);
 
-                    ViewGroup.LayoutParams layoutParams = codeAreaLayout.getLayoutParams();
-
-                    int[] location = new int[2];
-                    problemDetailLayout.getLocationOnScreen(location);
-                    layoutParams.height = (int)(location[1] + problemDetailLayout.getHeight() - event.getRawY() + codeAreaAdjustLine.getHeight() / 2.0f);
-                    if (layoutParams.height < codeAreaAdjustLine.getHeight()) {
-                        layoutParams.height = codeAreaAdjustLine.getHeight();
-                    } else if (layoutParams.height > problemDetailLayout.getHeight()) {
-                        layoutParams.height = problemDetailLayout.getHeight();
+                if (codeAreaLayout == null) {
+                    View view = getView();
+                    if (view != null) {
+                        codeAreaLayout = (RelativeLayout) view.findViewById(R.id.codeAreaLayout);
+                        RelativeLayout codeAreaAdjustLine = (RelativeLayout) view.findViewById(R.id.problemCodeAreaAdjustLine);
+                        RelativeLayout problemDetailLayout = (RelativeLayout) view.findViewById(R.id.problemDetailLayout);
+                        int[] problemDetailLayoutLocation = new int[2];
+                        problemDetailLayout.getLocationOnScreen(problemDetailLayoutLocation);
+                        codeAreaAdjustLineHeight = codeAreaAdjustLine.getHeight();
+                        codeAreaMeasureBaseTerm = problemDetailLayoutLocation[1] + problemDetailLayout.getHeight() + codeAreaAdjustLineHeight / 2.0f;
+                        problemDetailLayoutHeight = problemDetailLayout.getHeight();
+                    } else {
+                        return true;
                     }
-                    codeAreaLayout.setLayoutParams(layoutParams);
                 }
+
+                codeAreaLayoutParams = codeAreaLayout.getLayoutParams();
+                codeAreaLayoutParams.height = (int) (codeAreaMeasureBaseTerm - event.getRawY());
+                if (codeAreaLayoutParams.height < codeAreaAdjustLineHeight) {
+                    codeAreaLayoutParams.height = codeAreaAdjustLineHeight;
+                } else if (codeAreaLayoutParams.height > problemDetailLayoutHeight) {
+                    codeAreaLayoutParams.height = problemDetailLayoutHeight;
+                }
+                codeAreaLayout.setLayoutParams(codeAreaLayoutParams);
             }
             return true;
         }
@@ -146,6 +185,21 @@ public class ProblemDetailFragment extends SlidingFragment implements View.OnCli
     private void startLoadDetailTask() {
         ProblemDetailAsyncLoader loader = new ProblemDetailAsyncLoader();
         loader.execute(problem);
+    }
+
+    private void startSolutionSubmitTask() {
+        View view = getView();
+        if (view != null) {
+            EditText codeAreaMainEditText = (EditText) view.findViewById(R.id.problemCodeAreaMainEditText);
+            String code = codeAreaMainEditText.getText().toString();
+            if (code == null || code.isEmpty()) {
+                Toast.makeText(getActivity(), R.string.problem_submit_failed_empty_code_body, Toast.LENGTH_SHORT).show();
+                return;
+            }
+            OJSolution solution = new OJSolution(problem.getId(), codeAreaMainEditText.getText().toString(), solutionLanguage);
+            SolutionSubmitAsyncTask task = new SolutionSubmitAsyncTask();
+            task.execute(solution);
+        }
     }
 
     private void notifyProblemDetailChange() {
@@ -281,6 +335,44 @@ public class ProblemDetailFragment extends SlidingFragment implements View.OnCli
                 ProblemDetailFragment.this.problem = problem;
             }
             notifyProblemDetailChange();
+        }
+    }
+
+    private class SolutionSubmitAsyncTask extends AsyncTask<OJSolution, Integer, OJSolution> {
+
+        private Toast submitProgressToast = Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT);
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            submitProgressToast.setText(R.string.problem_submit_working);
+            submitProgressToast.show();
+        }
+
+        @Override
+        protected OJSolution doInBackground(OJSolution... ojSolutions) {
+            try {
+                OJClientHolder ojClientHolder = (OJClientHolder) getActivity();
+                if (ojClientHolder.getSolutionSubmitter().submit(ojSolutions[0])) {
+                    return ojSolutions[0];
+                } else {
+                    return null;
+                }
+            } catch (ClassCastException e) {
+                throw new ClassCastException("Activity must implement OJClientHolder");
+            }
+        }
+
+        @Override
+        protected void onPostExecute(OJSolution ojSolution) {
+            super.onPostExecute(ojSolution);
+            if (ojSolution == null) {
+                submitProgressToast.setText(R.string.problem_submit_failed_unknown_reason);
+            } else {
+                submitProgressToast.setText(R.string.problem_submit_successful);
+            }
+            submitProgressToast.show();
+
         }
     }
 }

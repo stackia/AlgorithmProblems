@@ -17,16 +17,23 @@ abstract public class SlidingFragment extends Fragment {
 
     private FragmentBackStackManager.NavigationBarHandler navigationBarHandler;
     private boolean noTitleAnimationNextTime = false;
+    private boolean noActionButtonAnimationNextTime = false;
     private boolean animating = false;
 
     abstract public int getNavigationBarTitleResource();
+
+    abstract public FragmentBackStackManager.NavigationBarHandler.NavigationBarActionButton getNavigationBarActionButton();
 
     public FragmentBackStackManager.NavigationBarHandler getNavigationBarHandler() {
         return navigationBarHandler;
     }
 
-    public void setNavigationBarTitleNoAnimationNextTime() {
+    public void setNoTitleAnimationNextTime() {
         noTitleAnimationNextTime = true;
+    }
+
+    public void setNoActionBarAnimationNextTime() {
+        noActionButtonAnimationNextTime = true;
     }
 
     public void resetNavigationBarTitle() {
@@ -41,6 +48,19 @@ abstract public class SlidingFragment extends Fragment {
         }
     }
 
+    public void resetNavigationBarActionButton() {
+        if (navigationBarHandler == null) {
+            return;
+        }
+        FragmentBackStackManager.NavigationBarHandler.NavigationBarActionButton navigationBarActionButton = getNavigationBarActionButton();
+        if (noActionButtonAnimationNextTime) {
+            noActionButtonAnimationNextTime = false;
+            navigationBarHandler.setNavigationBarActionButton(navigationBarActionButton, false);
+        } else {
+            navigationBarHandler.setNavigationBarActionButton(navigationBarActionButton, true);
+        }
+    }
+
     public boolean isAnimating() {
         return animating;
     }
@@ -50,6 +70,7 @@ abstract public class SlidingFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         if (!isHidden()) {
             resetNavigationBarTitle();
+            resetNavigationBarActionButton();
         }
     }
 
@@ -58,6 +79,7 @@ abstract public class SlidingFragment extends Fragment {
         super.onHiddenChanged(hidden);
         if (!hidden) {
             resetNavigationBarTitle();
+            resetNavigationBarActionButton();
         }
     }
 

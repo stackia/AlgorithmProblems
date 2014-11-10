@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,17 +35,15 @@ public class MainActivity extends Activity implements FragmentBackStackManager.N
     public final static String CURRENT_TAB_TAG = "CURRENT_TAB";
     public final static int REQUEST_CODE_OJ_ACCOUNT = 1;
     public final static String INTENT_EXTRA_REQUESTER_FRAGMENT_ID = "REQUESTER_FRAGMENT_ID";
-
+    private static OJAccount account = null;
+    private static OJAccountOperator accountOperator = null;
+    private static OJProblemFetcher problemFetcher = null;
+    private static OJSolutionSubmitter solutionSubmitter = null;
     private TabEnum currentTab = TabEnum.Undefined;
     private ProblemArchiveFragment problemArchiveFragment = null;
     private MyAnswerFragment myAnswerFragment = null;
     private FragmentBackStackManager currentBackStack = null;
     private boolean doubleBackToExitPressedOnce = false;
-
-    private OJAccount account = null;
-    private OJAccountOperator accountOperator = null;
-    private OJProblemFetcher problemFetcher = null;
-    private OJSolutionSubmitter solutionSubmitter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -241,7 +240,6 @@ public class MainActivity extends Activity implements FragmentBackStackManager.N
             out.setAnimationListener(new Animation.AnimationListener() {
                 @Override
                 public void onAnimationStart(Animation animation) {
-
                 }
 
                 @Override
@@ -254,12 +252,62 @@ public class MainActivity extends Activity implements FragmentBackStackManager.N
 
                 @Override
                 public void onAnimationRepeat(Animation animation) {
-
                 }
             });
             titleView.startAnimation(out);
         } else {
             titleView.setText(title);
+        }
+    }
+
+    @Override
+    public void setNavigationBarActionButton(final NavigationBarActionButton navigationBarActionButton, boolean animated) {
+        final Button button = (Button) findViewById(R.id.navigationBarActionButton);
+        if (navigationBarActionButton == null || navigationBarActionButton.text == null || navigationBarActionButton.text.isEmpty() || navigationBarActionButton.onClickListener == null) {
+            if (button.getVisibility() == View.VISIBLE) {
+                if (animated) {
+                    Animation animFadeOut = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.fade_out);
+                    button.setAnimation(animFadeOut);
+                }
+                button.setVisibility(View.GONE);
+            }
+        } else {
+            if (button.getVisibility() == View.GONE) {
+                button.setText(navigationBarActionButton.text);
+                button.setOnClickListener(navigationBarActionButton.onClickListener);
+                if (animated) {
+                    Animation animFadeIn = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.fade_in);
+                    button.setAnimation(animFadeIn);
+                }
+                button.setVisibility(View.VISIBLE);
+            } else {
+                if (animated) {
+                    AlphaAnimation out = new AlphaAnimation(1.0f, 0.0f);
+                    out.setDuration(150);
+                    out.setAnimationListener(new Animation.AnimationListener() {
+                        @Override
+                        public void onAnimationStart(Animation animation) {
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+                            button.setText(navigationBarActionButton.text);
+                            button.setOnClickListener(navigationBarActionButton.onClickListener);
+                            AlphaAnimation in = new AlphaAnimation(0.0f, 1.0f);
+                            in.setDuration(150);
+                            button.startAnimation(in);
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animation animation) {
+                        }
+                    });
+                    button.startAnimation(out);
+                } else {
+                    button.setText(navigationBarActionButton.text);
+                    button.setOnClickListener(navigationBarActionButton.onClickListener);
+                }
+            }
         }
     }
 

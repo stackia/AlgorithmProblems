@@ -11,6 +11,8 @@
     <string name="navigation_bar_title_problem_detail">Problem Detail</string>
     <string name="navigation_bar_title_my_answer">My Submission</string>
 
+    <string name="navigation_bar_action_button_text_submit">Submit</string>
+
     <string name="tab_bar_button_problem_archive_title">Problems</string>
     <string name="tab_bar_button_my_answer_title">My Submission</string>
 
@@ -31,6 +33,11 @@
     <string name="problem_sample_input_label">Sample Input</string>
     <string name="problem_sample_output_label">Sample Output</string>
     <string name="problem_code_area_label">Code Area</string>
+    <string name="problem_submit_failed_login_first">Please first login.</string>
+    <string name="problem_submit_failed_empty_code_body">:-) Input your code first&#8230;</string>
+    <string name="problem_submit_working">Submitting&#8230;</string>
+    <string name="problem_submit_successful">Submit successful. Please check \'My Submission\' for results.</string>
+    <string name="problem_submit_failed_unknown_reason">Submit failed for unknown reason :-(</string>
 
     <string name="login_via_hdu_account_hint">You can use your HDU OJ account to login. You can register one at http://acm.hdu.edu.cn if you do not have.</string>
     <string name="login_username_placeholder">Username</string>
@@ -41,5 +48,7 @@
     <string name="login_failed">Login failed. Invalid username or password, or network error.</string>
 
     <string name="answer_dashboard_login_button_text">Please Login</string>
+    <string name="answer_dashboard_temp_hint">This page have not been finished because I don\'t have much time. So I just give you this simple web view to check submissions.</string>
+    <string name="answer_dashboard_temp_refresh_button">Refresh</string>
 
 </resources>

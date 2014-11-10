@@ -45,11 +45,11 @@
 
         <RelativeLayout
             android:id="@+id/codeAreaLayout"
-            android:orientation="vertical"
-            android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="82dp"
-            android:background="#5CBBF2">
+            android:layout_alignParentBottom="true"
+            android:background="#5CBBF2"
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:id="@+id/problemCodeAreaAdjustLine"
@@ -58,13 +58,13 @@
                 android:background="#96D3F6">
 
                 <TextView
-                    android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:text="・ ・ ・"
-                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
                     android:textSize="10sp"
-                    android:textColor="#FFFFFF"/>
+                    android:textStyle="bold" />
             </RelativeLayout>
 
             <FrameLayout
@@ -73,55 +73,55 @@
                 android:layout_height="30dp" />
 
             <RelativeLayout
-                android:layout_below="@id/problemCodeAreaAdjustLine"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_below="@id/problemCodeAreaAdjustLine">
 
                 <TextView
                     android:id="@+id/problemCodeAreaLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
                     android:layout_marginLeft="14dp"
                     android:layout_marginTop="6dp"
-                    android:layout_alignParentLeft="true"
                     android:drawableLeft="@drawable/problem_code_area_label_icon"
                     android:drawablePadding="6dp"
-                    android:textColor="#FFFFFF"
-                    android:text="@string/problem_code_area_label" />
+                    android:text="@string/problem_code_area_label"
+                    android:textColor="#FFFFFF" />
 
                 <com.teamabcd.algorithmproblems.CustomView.ProgramLanguageSpinner
                     android:id="@+id/problemCodeAreaLanguageSpanner"
-                    android:spinnerMode="dialog"
-                    android:dropDownWidth="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="16dp"
-                    android:layout_marginTop="6dp"
                     android:background="@drawable/program_language_dashed_underline"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:dropDownWidth="wrap_content"
+                    android:paddingTop="6dp"
+                    android:spinnerMode="dialog" />
 
                 <EditText
                     android:id="@+id/problemCodeAreaMainEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_below="@id/problemCodeAreaLabel"
-                    android:background="@drawable/problem_code_area_edit_text_background"
-                    android:layout_marginTop="6dp"
                     android:layout_marginLeft="12dp"
                     android:layout_marginRight="12dp"
-                    android:paddingTop="8dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/problem_code_area_edit_text_background"
+                    android:gravity="top|left"
+                    android:inputType="textVisiblePassword|textNoSuggestions|textMultiLine"
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp"
-                    android:gravity="top|left"
-                    android:scrollbars="vertical"
-                    android:inputType="textVisiblePassword|textNoSuggestions|textMultiLine"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:paddingTop="8dp"
+                    android:scrollbars="vertical" />
             </RelativeLayout>
         </RelativeLayout>
 
         <ScrollView
-            android:layout_above="@id/codeAreaLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_above="@id/codeAreaLayout">
 
             <LinearLayout
                 android:layout_width="match_parent"

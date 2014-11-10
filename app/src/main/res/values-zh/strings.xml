@@ -11,6 +11,8 @@
     <string name="navigation_bar_title_problem_detail">题目详情</string>
     <string name="navigation_bar_title_my_answer">我的作答</string>
 
+    <string name="navigation_bar_action_button_text_submit">提交</string>
+
     <string name="tab_bar_button_problem_archive_title">题库</string>
     <string name="tab_bar_button_my_answer_title">我的作答</string>
 
@@ -31,6 +33,11 @@
     <string name="problem_sample_input_label">输入样例</string>
     <string name="problem_sample_output_label">输出样例</string>
     <string name="problem_code_area_label">答题区</string>
+    <string name="problem_submit_failed_login_first">请先登录后再答题</string>
+    <string name="problem_submit_failed_empty_code_body">:-) 请先输入你的答案&#8230;</string>
+    <string name="problem_submit_working">正在提交&#8230;</string>
+    <string name="problem_submit_successful">提交成功。请前往 \'我的作答\' 查看结果。</string>
+    <string name="problem_submit_failed_unknown_reason">提交失败 :-(</string>
 
     <string name="login_via_hdu_account_hint">请使用你的杭电OJ帐号登录。如果你还没有，可以前往 http://acm.hdu.edu.cn 进行注册。</string>
     <string name="login_username_placeholder">用户名</string>
@@ -41,6 +48,7 @@
     <string name="login_failed">登录失败。用户名或密码错误，或者连接超时。</string>
 
     <string name="answer_dashboard_login_button_text">请先登录</string>
-
+    <string name="answer_dashboard_temp_hint">因为时间有限，这个页面还没做完。我先放了个简易 WebView，之后有时间再继续完善。</string>
+    <string name="answer_dashboard_temp_refresh_button">刷新</string>
 
 </resources>

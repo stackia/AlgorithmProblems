@@ -76,6 +76,11 @@ public class ProblemListFragment extends SlidingFragment implements ListView.OnI
     }
 
     @Override
+    public FragmentBackStackManager.NavigationBarHandler.NavigationBarActionButton getNavigationBarActionButton() {
+        return null;
+    }
+
+    @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         FragmentBackStackManager backStackManager = getNavigationBarHandler().getCurrentBackStack();
         if (!backStackManager.isAnimating()) {

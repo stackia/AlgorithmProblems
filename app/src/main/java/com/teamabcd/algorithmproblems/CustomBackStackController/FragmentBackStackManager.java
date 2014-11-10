@@ -3,6 +3,7 @@ package com.teamabcd.algorithmproblems.CustomBackStackController;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.view.View;
 
 import com.teamabcd.algorithmproblems.CustomView.SlidingFragment;
 import com.teamabcd.algorithmproblems.R;
@@ -37,7 +38,8 @@ public class FragmentBackStackManager {
     public void showTopFragment() {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         SlidingFragment topFragment = backStack.peek();
-        topFragment.setNavigationBarTitleNoAnimationNextTime();
+        topFragment.setNoTitleAnimationNextTime();
+        topFragment.setNoActionBarAnimationNextTime();
         if (topFragment.isAdded()) {
             transaction.show(topFragment);
         } else {
@@ -45,6 +47,7 @@ public class FragmentBackStackManager {
         }
         transaction.commit();
         topFragment.resetNavigationBarTitle();
+        topFragment.resetNavigationBarActionButton();
         updateNavigationBarBackButtonEnabled(false);
     }
 
@@ -127,5 +130,12 @@ public class FragmentBackStackManager {
         public String getNavigationBarTitle();
 
         public void setNavigationBarTitle(String title, boolean animated);
+
+        public void setNavigationBarActionButton(NavigationBarActionButton navigationBarActionButton, boolean animated);
+
+        public static class NavigationBarActionButton {
+            public String text;
+            public View.OnClickListener onClickListener;
+        }
     }
 }
